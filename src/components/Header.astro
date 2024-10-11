@@ -1,0 +1,180 @@
+---
+import Socials from './Socials.astro'
+
+const { activeNav } = Astro.props
+---
+
+<header class="header-nav">
+  <div class="nav-container">
+    <a href="/" class="logo whitespace-nowrap">
+      <code class="title">RDias66</code>
+    </a>
+
+    <!-- Navigation Links -->
+    <nav id="nav-menu">
+      <button
+        class="hamburger-menu focus-outline"
+        aria-label="Open Menu"
+        aria-expanded="false"
+        aria-controls="menu-items"
+      >
+        <!-- Original Hamburger Button Code -->
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </button>
+
+      <ul id="menu-items" class="menu-items">
+        <li>
+          <a href="/posts/" class={activeNav === 'posts' ? 'active' : ''}
+            ><code class="nav-item">Posts</code></a
+          >
+        </li>
+        <li>
+          <a href="/tags/" class={activeNav === 'tags' ? 'active' : ''}
+            ><code class="nav-item">Tags</code></a
+          >
+        </li>
+        <li>
+          <a href="/about/" class={activeNav === 'about' ? 'active' : ''}>
+            <code class="nav-item">About</code></a
+          >
+        </li>
+        <li>
+          <a href="/search/" class={activeNav === 'search' ? 'active' : ''}>
+            <code class="nav-item">Search</code></a
+          >
+        </li>
+        <li>
+          <button id="theme-btn" class="focus-outline">Toggle Theme</button>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Search and Social Links -->
+    <div class="header-right">
+      <Socials />
+    </div>
+  </div>
+</header>
+
+<style>
+  .header-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: var(--background-color);
+    display: flex;
+    align-items: center;
+    padding: var(--padding);
+    z-index: 10;
+    justify-content: space-between;
+    max-height: 3rem;
+  }
+
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  /* Navigation menu */
+  nav {
+    position: relative;
+  }
+
+  .menu-items {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    gap: 1rem;
+  }
+
+  /* Ensure menu-items are always shown on larger screens */
+  .menu-items.hidden {
+    display: none;
+  }
+
+  nav ul li {
+    display: inline-block;
+  }
+
+  /* Hamburger menu button */
+  .hamburger-menu {
+    display: none;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .line {
+    height: 2px;
+    width: 100%;
+    background: #333;
+  }
+  a {
+    text-decoration: none;
+  }
+
+  /* Show hamburger menu on smaller screens */
+  @media (max-width: 768px) {
+    .hamburger-menu {
+      display: flex;
+    }
+
+    .menu-items {
+      display: none; /* Hide by default */
+      flex-direction: column;
+      position: absolute;
+      top: 100%;
+      right: 0;
+      background-color: var(--background-color);
+      width: 200px;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    nav ul li {
+      margin: 0;
+      padding: 1rem;
+    }
+
+    nav ul li a {
+      display: block;
+      padding: 1rem;
+    }
+  }
+
+  /* Toggle menu visibility when hamburger is clicked */
+  .hamburger-menu[aria-expanded='true'] + .menu-items {
+    display: flex;
+  }
+
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+
+  .nav-item {
+    color: var(--text-primary);
+  }
+</style>
+
+<script>
+  const menuButton = document.querySelector('.hamburger-menu')
+  const menuItems = document.querySelector('.menu-items')
+
+  menuButton.addEventListener('click', () => {
+    const expanded = menuButton.getAttribute('aria-expanded') === 'true'
+    menuButton.setAttribute('aria-expanded', expanded ? 'false' : 'true')
+    menuItems.classList.toggle('hidden')
+  })
+</script>

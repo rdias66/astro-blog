@@ -1,0 +1,72 @@
+---
+interface Social {
+  name: string
+  icon: string
+  url: string
+}
+
+const socials: Social[] = [
+  {
+    name: 'GitHub',
+    url: 'https://github.com/rdias66',
+    icon: 'github',
+  },
+  {
+    name: 'LinkedIn',
+    url: 'https://www.linkedin.com/in/rodrigo-dias-45009a242',
+    icon: 'linkedin',
+  },
+  {
+    name: 'Instagram',
+    url: 'https://www.instagram.com/diasrodr/',
+    icon: 'instagram',
+  },
+]
+---
+
+<ul class="socials">
+  {
+    socials.map((social) => (
+      <li>
+        <a
+          href={social.url}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label={social.name}
+        >
+          <svg class="social-icon" fill="currentColor">
+            <use href={`/stack.svg#${social.icon}`} />
+          </svg>
+        </a>
+      </li>
+    ))
+  }
+</ul>
+
+<style>
+  .socials {
+    display: flex;
+    gap: 2rem;
+    padding: 1rem;
+    margin-top: 4px;
+  }
+
+  .socials li {
+    list-style-type: none;
+  }
+
+  .socials a {
+    text-decoration: none;
+  }
+
+  .social-icon {
+    width: 24px;
+    height: 24px;
+    transition: color 0.3s;
+    color: var(--text-primary);
+  }
+
+  .socials a:hover .social-icon {
+    color: #ff6666;
+  }
+</style>
