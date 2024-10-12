@@ -1,18 +1,12 @@
 ---
 import BaseLayout from '@layouts/BaseLayout.astro'
 import Header from '@components/Header.astro'
-import Separator from '@components/Separator.astro'
+import PageLayout from '@layouts/PageLayout.astro'
 ---
 
 <BaseLayout>
   <Header />
-  <main id="main-content">
-    <section>
-      <code class="title">RDIAS66 BLOG</code>
-    </section>
-
-    <Separator />
-  </main>
+  <PageLayout>
+    <code class="title">RDIAS66 BLOG</code>
+  </PageLayout>
 </BaseLayout>
-
-<style></style>

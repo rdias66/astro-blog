@@ -14,6 +14,7 @@
   --secondary-color: #c926c1; /* Default dark theme */
   --text-primary: white; /* Default dark theme */
   --text-secondary: rgba(255, 255, 255, 0.644); /* Default dark theme */
+    --max-content-width: 1600px; 
 }
 
 [data-theme='light'] {
@@ -28,7 +29,6 @@
 body {
   background-color: var(--background-color);
   color: var(--text-primary);
-  font-family: Arial, sans-serif;
   transition: background-color 0.3s ease, color 0.3s ease;
 }
 
@@ -50,4 +50,10 @@ body {
   font-size: 18px;
 }
 
+@media (min-width: 769px) {
+  body {
+    width: 50%;
+    margin: 0 auto;
+  }
+}
 

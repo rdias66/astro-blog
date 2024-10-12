@@ -1,0 +1,21 @@
+<div class="page-layout">
+  <slot />
+</div>
+
+<style>
+  .page-layout {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    min-height: calc(100vh - 4rem);
+    padding: 2rem 1rem;
+    margin: 0 auto;
+  }
+
+  @media (min-width: 768px) {
+    .page-layout {
+      max-width: var(--max-content-width);
+    }
+  }
+</style>
