@@ -41,7 +41,7 @@ const { activeNav } = Astro.props
     top: 0;
     width: 100%;
     z-index: 100;
-    transition: height 0.3s ease; /* Smooth expand effect */
+    transition: height 0.3s ease;
   }
 
   .nav-container {
@@ -50,6 +50,7 @@ const { activeNav } = Astro.props
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
+
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -91,29 +92,30 @@ const { activeNav } = Astro.props
 
   .visible {
     display: flex;
-    flex-direction: row; /* Change to row for horizontal stacking */
+    flex-direction: row;
   }
 
   @media (min-width: 768px) {
     .logo {
       position: absolute;
+      margin-top: 0.8rem;
     }
     .nav-container {
       display: flex;
-      align-items: center; /* Align items vertically centered */
-      justify-content: space-between; /* Adjusted to evenly distribute space between logo and menu items */
+      align-items: center;
+      justify-content: space-between;
     }
 
     .menu-items {
       padding-bottom: 1rem;
-      display: flex; /* Show menu items on large screens */
+      display: flex;
       justify-content: end;
       align-items: center;
-      gap: 2rem; /* Add space between menu items */
+      gap: 2rem;
     }
 
     .header-nav.expanded {
-      height: auto; /* Allow header to expand based on content */
+      height: auto;
     }
   }
 </style>
