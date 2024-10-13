@@ -1,0 +1,33 @@
+---
+interface Ref {
+  name?: string
+  icon: string
+  url?: string
+  blank?: boolean
+}
+const { ref } = Astro.props as { ref: Ref }
+---
+
+<a
+  href={ref.url}
+  target={ref.blank ? '_blank' : '_self'}
+  rel="noopener noreferrer"
+  aria-label={ref.name}
+>
+  <svg class="social-icon" fill="currentColor">
+    <use href={`/stack.svg#${ref.icon}`}></use>
+  </svg>
+</a>
+
+<style>
+  .social-icon {
+    width: 24px;
+    height: 24px;
+    transition: color 0.3s;
+    color: var(--text-primary);
+  }
+
+  a:hover .social-icon {
+    color: var(--text-secondary);
+  }
+</style>

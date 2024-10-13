@@ -1,7 +1,29 @@
 ---
+interface Ref {
+  name?: string
+  icon: string
+  url?: string
+  blank?: boolean
+}
 import Separator from './Separator.astro'
 import Hamburguer from './ui/Hamburguer.astro'
+import IconButton from './ui/IconButton.astro'
 const { activeNav } = Astro.props
+const searchRef: Ref = {
+  name: 'Search',
+  icon: 'search',
+  url: '/search',
+  blank: false,
+}
+const sunRef: Ref = {
+  name: 'Light',
+  icon: 'sun',
+}
+const moonRef: Ref = {
+  name: 'Dark',
+  icon: 'moon',
+}
+const savedTheme = localStorage.getItem('theme')
 ---
 
 <header class="header-nav">
@@ -29,7 +51,18 @@ const { activeNav } = Astro.props
       </a>
     </li>
     <li>
-      <button id="theme-btn">Toggle Theme</button>
+      <button id=""><IconButton ref={searchRef} /></button>
+    </li>
+    <li>
+      <button id="theme-btn">
+        {
+          savedTheme === 'light' ? (
+            <IconButton ref={sunRef} />
+          ) : (
+            <IconButton ref={moonRef} />
+          )
+        }
+      </button>
     </li>
   </ul>
   <Separator />

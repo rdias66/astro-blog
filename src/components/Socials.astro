@@ -1,46 +1,39 @@
 ---
-interface Social {
-  name: string
+import IconButton from "./ui/IconButton.astro"
+
+interface Ref {
+  name?: string
   icon: string
   url: string
+  blank: boolean
 }
 
-const socials: Social[] = [
+const socials: Ref[] = [
   {
     name: 'GitHub',
     url: 'https://github.com/rdias66',
     icon: 'github',
+    blank: true,
   },
   {
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/rodrigo-dias-45009a242',
     icon: 'linkedin',
+    blank: true,
   },
   {
     name: 'Instagram',
     url: 'https://www.instagram.com/diasrodr/',
     icon: 'instagram',
+    blank: true,
   },
 ]
 ---
 
 <ul class="socials">
-  {
-    socials.map((social) => (
-      <li>
-        <a
-          href={social.url}
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label={social.name}
-        >
-          <svg class="social-icon" fill="currentColor">
-            <use href={`/stack.svg#${social.icon}`} />
-          </svg>
-        </a>
-      </li>
-    ))
-  }
+  {socials.map((social) => <li>
+    <IconButton ref={social} />
+  </li>)}
 </ul>
 
 <style>
@@ -57,16 +50,5 @@ const socials: Social[] = [
 
   .socials a {
     text-decoration: none;
-  }
-
-  .social-icon {
-    width: 24px;
-    height: 24px;
-    transition: color 0.3s;
-    color: var(--text-primary);
-  }
-
-  .socials a:hover .social-icon {
-    color: #ff6666;
   }
 </style>
