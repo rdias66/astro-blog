@@ -29,6 +29,12 @@ function reflectPreference() {
   document.firstElementChild.setAttribute('data-theme', themeValue)
   document.querySelector('#theme-btn')?.setAttribute('aria-label', themeValue)
 
+  const themeButton = document.querySelector('#theme-btn i')
+  if (themeButton) {
+    themeButton.className =
+      themeValue === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun'
+  }
+
   // Get a reference to the body element
   const body = document.body
 

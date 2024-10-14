@@ -1,33 +1,36 @@
 ---
 interface Ref {
   name?: string
-  icon: string
+  icon: string // Aqui você irá passar o nome do ícone do Font Awesome
   url?: string
   blank?: boolean
+  id?: string
 }
+
 const { ref } = Astro.props as { ref: Ref }
 ---
 
 <a
+  id={ref.id}
   href={ref.url}
   target={ref.blank ? '_blank' : '_self'}
   rel="noopener noreferrer"
   aria-label={ref.name}
 >
-  <svg class="social-icon" fill="currentColor">
-    <use href={`/stack.svg#${ref.icon}`}></use>
-  </svg>
+  <i class={`${ref.icon} icon`}></i>
 </a>
 
 <style>
-  .social-icon {
-    width: 24px;
-    height: 24px;
-    transition: color 0.3s;
+  .icon {
+    transition: color 0.5s;
     color: var(--text-primary);
   }
 
-  a:hover .social-icon {
+  a:hover {
+    cursor: pointer;
+  }
+
+  a:hover .icon {
     color: var(--text-secondary);
   }
 </style>

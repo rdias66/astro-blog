@@ -4,26 +4,27 @@ interface Ref {
   icon: string
   url?: string
   blank?: boolean
+  id?: string
 }
+
 import Separator from './Separator.astro'
 import Hamburguer from './ui/Hamburguer.astro'
 import IconButton from './ui/IconButton.astro'
+
 const { activeNav } = Astro.props
+
 const searchRef: Ref = {
   name: 'Search',
-  icon: 'search',
+  icon: 'fa-solid fa-magnifying-glass',
   url: '/search',
   blank: false,
 }
-const sunRef: Ref = {
-  name: 'Light',
-  icon: 'sun',
+
+let themeRef: Ref = {
+  name: 'Theme Icon',
+  icon: 'fa-solid fa-sun',
+  id: 'theme-btn',
 }
-const moonRef: Ref = {
-  name: 'Dark',
-  icon: 'moon',
-}
-const savedTheme = localStorage.getItem('theme')
 ---
 
 <header class="header-nav">
@@ -51,18 +52,10 @@ const savedTheme = localStorage.getItem('theme')
       </a>
     </li>
     <li>
-      <button id=""><IconButton ref={searchRef} /></button>
+      <IconButton ref={searchRef} />
     </li>
     <li>
-      <button id="theme-btn">
-        {
-          savedTheme === 'light' ? (
-            <IconButton ref={sunRef} />
-          ) : (
-            <IconButton ref={moonRef} />
-          )
-        }
-      </button>
+      <IconButton ref={themeRef} />
     </li>
   </ul>
   <Separator />
@@ -83,7 +76,6 @@ const savedTheme = localStorage.getItem('theme')
     align-items: center;
     justify-content: space-between;
     padding: 1rem;
-
     max-width: 1200px;
     margin: 0 auto;
   }
@@ -140,11 +132,10 @@ const savedTheme = localStorage.getItem('theme')
     }
 
     .menu-items {
-      padding-bottom: 1rem;
       display: flex;
       justify-content: end;
-      align-items: center;
       gap: 2rem;
+      margin-bottom: 1rem;
     }
 
     .header-nav.expanded {

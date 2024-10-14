@@ -1,5 +1,5 @@
 ---
-import IconButton from "./ui/IconButton.astro"
+import IconButton from './ui/IconButton.astro'
 
 interface Ref {
   name?: string
@@ -12,28 +12,32 @@ const socials: Ref[] = [
   {
     name: 'GitHub',
     url: 'https://github.com/rdias66',
-    icon: 'github',
+    icon: 'fa-brands fa-github',
     blank: true,
   },
   {
     name: 'LinkedIn',
     url: 'https://www.linkedin.com/in/rodrigo-dias-45009a242',
-    icon: 'linkedin',
+    icon: 'fa-brands fa-linkedin',
     blank: true,
   },
   {
     name: 'Instagram',
     url: 'https://www.instagram.com/diasrodr/',
-    icon: 'instagram',
+    icon: 'fa-brands fa-instagram',
     blank: true,
   },
 ]
 ---
 
 <ul class="socials">
-  {socials.map((social) => <li>
-    <IconButton ref={social} />
-  </li>)}
+  {
+    socials.map((social) => (
+      <li>
+        <IconButton ref={social} />
+      </li>
+    ))
+  }
 </ul>
 
 <style>
