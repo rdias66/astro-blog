@@ -98,11 +98,9 @@ const structuredData = {
     <meta name="theme-color" content="" />
     <ViewTransitions />
 
-    <!-- Import Theme Toggle Script -->
     <script is:inline>
-      // Initialize theme based on localStorage
       ;(function () {
-        const savedTheme = localStorage.getItem('theme') || 'dark' // Default to dark
+        const savedTheme = localStorage.getItem('theme') || 'dark'
         document.documentElement.setAttribute('data-theme', savedTheme)
       })()
     </script>

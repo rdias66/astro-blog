@@ -25,34 +25,34 @@
     background: none;
     border: none;
     cursor: pointer;
-    position: relative; /* For positioning lines */
+    position: relative;
   }
 
   .line {
     height: 2px;
     width: 100%;
     background-color: var(--text-primary);
-    transition: opacity 0.3s ease; /* Smooth transition */
+    transition: opacity 0.3s ease;
   }
 
   .hamburger-line {
-    display: block; /* Default for hamburger lines */
+    display: block;
   }
 
   .close-line {
-    position: absolute; /* Positioning for close lines */
+    position: absolute;
     left: 0;
-    transition: opacity 0.3s ease; /* Smooth transition */
+    transition: opacity 0.3s ease;
   }
 
   .close-line:nth-child(4) {
-    top: 0; /* Position the first close line */
-    transform: rotate(45deg); /* Rotate for diagonal line */
+    top: 0;
+    transform: rotate(45deg);
   }
 
   .close-line:nth-child(5) {
-    top: 0; /* Position the second close line */
-    transform: rotate(-45deg); /* Rotate for diagonal line */
+    top: 0;
+    transform: rotate(-45deg);
   }
 
   .hidden {
@@ -77,21 +77,15 @@
       menuBtn.setAttribute('aria-expanded', (!isExpanded).toString())
       menuItems?.classList.toggle('hidden')
       menuItems?.classList.toggle('visible')
-
-      // Add or remove the expanded class for header
       document
         .querySelector('.header-nav')
         ?.classList.toggle('expanded', !isExpanded)
-
-      // Toggle visibility of hamburger and close lines
       hamburgerLines.forEach((line) =>
         line.classList.toggle('hidden', !isExpanded),
       )
       closeLines.forEach((line) => line.classList.toggle('hidden', isExpanded))
     })
   }
-
   toggleNav()
-
   document.addEventListener('astro:after-swap', toggleNav)
 </script>

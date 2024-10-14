@@ -12,25 +12,22 @@ const { noPadding = false, ariaHidden = true } = Astro.props
 </div>
 
 <style>
-  /* Separator Container */
   .separator-container {
-    max-width: 64rem; /* Equivalent to max-w-3xl */
-    margin-left: auto; /* Equivalent to mx-auto */
+    max-width: 64rem;
+    margin-left: auto;
     margin-right: auto;
-    padding-left: 1rem; /* Equivalent to px-4 */
+    padding-left: 1rem;
     padding-right: 1rem;
   }
 
-  /* If noPadding is true, remove the padding */
   .separator-container.no-padding {
     padding-left: 0;
     padding-right: 0;
   }
 
-  /* Separator Line */
   .separator-line {
     border: none;
-    border-top: 1px solid var(--primary-color); /* Match the theme line color */
+    border-top: 2px solid var(--primary-color);
     margin: 0;
   }
 </style>
