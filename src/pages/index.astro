@@ -1,10 +1,69 @@
 ---
+import Separator from '@components/Separator.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import PageLayout from '@layouts/PageLayout.astro'
+
+const introImage =
+  'https://github.com/rdias66/astro-blogfolio-assets/blob/main/images/blog-assets/et-home.png?raw=true'
+const introTitle = 'FULL STACK'
+const intro =
+  'Seja bem-vindo ao meu blog profissional! Aqui, compartilho tutoriais e projetos voltados para o aprendizado prático, com o objetivo de dividir experiências e fortalecer o conhecimento adquirido ao longo da minha jornada como desenvolvedor júnior. O foco deste espaço é mostrar de forma clara e didática o desenvolvimento completo de aplicações, passando por stacks específicas e integrando tecnologias de DevOps, Frontend, Backend e Mobile. Nos primeiros conteúdos, vou me concentrar principalmente em Infraestrutura como Código (IaC) e nas estratégias de deploy e publicação de aplicações utilizando serviços como AWS e Azure.'
 ---
 
 <BaseLayout>
   <PageLayout>
-    <code class="title">RDIAS66 BLOG</code>
+    <div class="intro-container">
+      <div class="article-container">
+        <code class="title">{introTitle}</code>
+        <article><code class="intro-article sub-title">{intro}</code></article>
+      </div>
+      <div class="image-container">
+        <img src={introImage} alt="et-home" />
+      </div>
+    </div>
+    <Separator />
   </PageLayout>
+
+  <style>
+    .intro-container {
+      display: block;
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    .article-container {
+      margin-bottom: 20px;
+    }
+
+    .intro-article {
+      font-size: 1rem;
+      line-height: 1.5;
+      color: #333;
+    }
+
+    .image-container img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+      margin: 0 auto;
+    }
+
+    @media (min-width: 768px) {
+      .intro-container {
+        display: flex;
+        justify-items: baseline;
+        align-items: start;
+        text-align: left;
+      }
+
+      .article-container {
+        flex: 1;
+        margin-right: 20px;
+        color: var(--primary-color);
+      }
+      .image-container {
+        flex: 0 0 40%;
+      }
+    }
+  </style>
 </BaseLayout>
