@@ -5,7 +5,7 @@ export const SITE: Site = {
   author: 'Rodrigo Dias de Almeida',
   profile: 'https://rdias66.codes/',
   desc: 'Blog for Dev related tutorials',
-  title: 'RDias66 Blog',
+  title: 'rdias Codes ',
   lightAndDarkMode: true,
   postPerIndex: 4,
   postPerPage: 3,

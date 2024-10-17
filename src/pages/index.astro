@@ -5,23 +5,25 @@ import PageLayout from '@layouts/PageLayout.astro'
 
 const introImage =
   'https://github.com/rdias66/astro-blogfolio-assets/blob/main/images/blog-assets/et-home.png?raw=true'
-const introTitle = 'FULL STACK'
+const introTitle = 'Olá.'
 const intro =
-  'Seja bem-vindo ao meu blog profissional! Aqui, compartilho tutoriais e projetos voltados para o aprendizado prático, com o objetivo de dividir experiências e fortalecer o conhecimento adquirido ao longo da minha jornada como desenvolvedor júnior. O foco deste espaço é mostrar de forma clara e didática o desenvolvimento completo de aplicações, passando por stacks específicas e integrando tecnologias de DevOps, Frontend, Backend e Mobile. Nos primeiros conteúdos, vou me concentrar principalmente em Infraestrutura como Código (IaC) e nas estratégias de deploy e publicação de aplicações utilizando serviços como AWS e Azure.'
+  'Seja bem-vindo ao meu blog profissional! Aqui, compartilho tutoriais e projetos voltados para o aprendizado prático, com o objetivo de dividir experiências e fortalecer o conhecimento adquirido ao longo da minha jornada como desenvolvedor júnior. O foco deste espaço é mostrar de forma clara e didática o desenvolvimento completo de aplicações, desde estagios iniciais de planejamento back e frontend, até fluxos de DevOps.'
 ---
 
 <BaseLayout>
   <PageLayout>
     <div class="intro-container">
       <div class="article-container">
-        <code class="title">{introTitle}</code>
-        <article><code class="intro-article sub-title">{intro}</code></article>
+        <code class="title-red">{introTitle}</code>
+        <article class="intro-article">
+          <code class="sub-title">{intro}</code>
+        </article>
       </div>
       <div class="image-container">
         <img src={introImage} alt="et-home" />
       </div>
     </div>
-    <Separator />
+    <Separator thin={true} />
   </PageLayout>
 
   <style>
@@ -48,6 +50,10 @@ const intro =
       margin: 0 auto;
     }
 
+    .intro-article {
+      margin-top: 2rem;
+    }
+
     @media (min-width: 768px) {
       .intro-container {
         display: flex;
@@ -60,9 +66,11 @@ const intro =
         flex: 1;
         margin-right: 20px;
         color: var(--primary-color);
+        padding: 1rem;
       }
       .image-container {
         flex: 0 0 40%;
+        margin-top: 3.5rem;
       }
     }
   </style>

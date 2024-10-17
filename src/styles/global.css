@@ -9,23 +9,23 @@
 
 /* Global styles */
 :root {
-  --background-color: #111; /* Default dark theme */
-  --primary-color: #ff6666; /* Default dark theme */
-  --secondary-color: #c926c1; /* Default dark theme */
-  --text-primary: white; /* Default dark theme */
-  --text-secondary: rgba(255, 255, 255, 0.644); /* Default dark theme */
+  --background-color: #111;
+  --primary-color: #ff6666; 
+  --secondary-color: #c926c1; 
+  --text-primary: white;
+  --text-secondary: rgba(255, 255, 255, 0.644);
     --max-content-width: 1600px; 
 }
 
 [data-theme='light'] {
-  --background-color: #f7ecec; /* Light theme */
-  --primary-color: #c926c1; /* Light theme */
-  --secondary-color: #ff6666; /* Light theme */
-  --text-primary: rgb(0, 0, 0); /* Light theme */
-  --text-secondary: rgba(65, 63, 63, 0.644); /* Light theme */
+  --background-color: #f7ecec; 
+  --primary-color: #c926c1; 
+  --secondary-color: #ff6666; 
+  --text-primary: rgb(0, 0, 0);
+  --text-secondary: rgba(65, 63, 63, 0.644); 
 }
 
-/* Apply the background color to the body */
+
 body {
   background-color: var(--background-color);
   color: var(--text-primary);
@@ -45,9 +45,15 @@ body {
   font-size: 42px;
 }
 
+.title-red {
+  color: var(--primary-color);
+  font-size: 54px;
+ 
+}
+
 .sub-title {
-  color: var(--text-secondary);
-  font-size: 18px;
+  color: var(--text-primary);
+  font-size: 17px;
 }
 
 @media (min-width: 769px) {

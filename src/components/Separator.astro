@@ -2,13 +2,17 @@
 export interface Props {
   noPadding?: boolean
   ariaHidden?: boolean
+  thin?: boolean
 }
 
-const { noPadding = false, ariaHidden = true } = Astro.props
+const { noPadding = false, ariaHidden = true, thin } = Astro.props
 ---
 
 <div class={`separator-container ${noPadding ? 'no-padding' : ''}`}>
-  <hr class="separator-line" aria-hidden={ariaHidden} />
+  <hr
+    class={thin ? 'separator-line-thin' : 'separator-line'}
+    aria-hidden={ariaHidden}
+  />
 </div>
 
 <style>
@@ -28,6 +32,12 @@ const { noPadding = false, ariaHidden = true } = Astro.props
   .separator-line {
     border: none;
     border-top: 2px solid var(--primary-color);
+    margin: 0;
+  }
+
+  .separator-line-thin {
+    border: none;
+    border-top: 1px solid var(--primary-color);
     margin: 0;
   }
 </style>
