@@ -1,0 +1,70 @@
+---
+const { pubDatetime, modDatetime, size = "sm", class: customClass = "" } = Astro.props;
+
+const myDatetime = new Date(modDatetime && modDatetime > pubDatetime ? modDatetime : pubDatetime);
+
+const date = myDatetime.toLocaleDateString('en-US', { // Replace 'en-US' with LOCALE.langTag if necessary
+  year: "numeric",
+  month: "short",
+  day: "numeric",
+});
+
+const time = myDatetime.toLocaleTimeString('en-US', { // Replace 'en-US' with LOCALE.langTag if necessary
+  hour: "2-digit",
+  minute: "2-digit",
+});
+---
+
+<div class={`datetime-container ${customClass}`}>
+  <i class="icon fa-solid fa-calendar-days"></i>
+  {modDatetime && modDatetime > pubDatetime ? (
+    <span class={`datetime-text ${size === "sm" ? "text-sm" : "text-lg"}`}>
+      Updated:
+    </span>
+  ) : (
+    <span class="sr-only">Published:</span>
+  )}
+  <span class={`datetime-text ${size === "sm" ? "text-sm" : "text-lg"}`}>
+    <time dateTime={myDatetime.toISOString()}>
+      {date}
+    </time>
+    <span aria-hidden="true"> | </span>
+    <span class="sr-only">&nbsp;at&nbsp;</span>
+    <span class="text-nowrap">{time}</span>
+  </span>
+</div>
+
+<style>
+  .datetime-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.8;
+  }
+  .icon {
+    font-family: 'Font Awesome 5 Free';
+    font-weight: 900;
+  }
+  .datetime-text {
+    font-style: italic;
+  }
+  .text-sm {
+    font-size: 0.875rem;
+  }
+  .text-lg {
+    font-size: 1rem;
+  }
+  .sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    border: 0;
+  }
+  .text-nowrap {
+    white-space: nowrap;
+  }
+</style>

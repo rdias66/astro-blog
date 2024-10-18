@@ -1,0 +1,18 @@
+---
+import { SITE } from '@config'
+import BaseLayout from './BaseLayout.astro'
+import PageLayout from './PageLayout.astro'
+
+const { frontmatter } = Astro.props
+
+const baseLayoutProps = {
+  title: `${frontmatter.title} | ${SITE.title}`,
+  author: frontmatter.author,
+  description: frontmatter.description,
+  pubDatetime: frontmatter.pubDatetime,
+  modDatetime: frontmatter.modDatetime,
+  scrollSmooth: true,
+}
+---
+
+<BaseLayout />
