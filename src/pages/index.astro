@@ -1,7 +1,16 @@
 ---
 import Separator from '@components/Separator.astro'
+import PostCard from '@components/ui/PostCard.astro'
+import { SITE } from '@config'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import PageLayout from '@layouts/PageLayout.astro'
+import { getSortedPosts } from '@utils/post.utils'
+import { getCollection } from 'astro:content'
+const posts = await getCollection('blog')
+
+const sortedPosts = getSortedPosts(posts)
+const featuredPosts = sortedPosts.filter(({ data }) => data.featured)
+const recentPosts = sortedPosts.filter(({ data }) => !data.featured)
 
 const introImage =
   'https://github.com/rdias66/astro-blogfolio-assets/blob/main/images/blog-assets/et-home.png?raw=true'
@@ -24,6 +33,45 @@ const intro =
       </div>
     </div>
     <Separator thin={true} />
+    {
+      featuredPosts.length > 0 && (
+        <>
+          <section id="featured">
+            <h2>Featured</h2>
+            <ul>
+              {featuredPosts.map(({ data, slug }) => (
+                <PostCard
+                  href={`/posts/${slug}/`}
+                  frontmatter={data}
+                  secHeading={false}
+                />
+              ))}
+            </ul>
+          </section>
+          {recentPosts.length > 0 && <Separator thin={true} />}
+        </>
+      )
+    }
+
+    {
+      recentPosts.length > 0 && (
+        <section id="recent-posts">
+          <h2>Recent Posts</h2>
+          <ul>
+            {recentPosts.map(
+              ({ data, slug }, index) =>
+                index < SITE.postPerIndex && (
+                  <PostCard
+                    href={`/posts/${slug}/`}
+                    frontmatter={data}
+                    secHeading={false}
+                  />
+                ),
+            )}
+          </ul>
+        </section>
+      )
+    }
   </PageLayout>
 
   <style>

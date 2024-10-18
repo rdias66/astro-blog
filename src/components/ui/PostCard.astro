@@ -1,0 +1,67 @@
+---
+import { slugifyStr } from '@utils/slugify'
+import DateCard from './DateCard.astro'
+
+const { href, frontmatter, secHeading = true } = Astro.props
+const { title, pubDatetime, modDatetime, description } = frontmatter
+
+const headerProps = {
+  style: { viewTransitionName: slugifyStr(title) },
+}
+---
+
+<li class="card-container">
+  <a href={href} class="card-link">
+    {
+      secHeading ? (
+        <code class="title-lg" {...headerProps}>
+          {title}
+        </code>
+      ) : (
+        <code class="title-md" {...headerProps}>
+          {title}
+        </code>
+      )
+    }
+  </a>
+  <DateCard pubDatetime={pubDatetime} modDatetime={modDatetime} />
+  <code class="description">{description}</code>
+</li>
+
+<style>
+  .card-container {
+    margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .card-link {
+    display: inline-block;
+    font-weight: 500;
+    text-decoration: dashed underline;
+    color: var(--text-accent);
+    text-underline-offset: 4px;
+  }
+
+  .card-link:focus-visible {
+    text-decoration: none;
+    text-underline-offset: 0;
+  }
+
+  .title-lg {
+    font-size: 1.75rem; /* 28px */
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .title-md {
+    font-size: 1.5rem; /* 24px */
+    font-weight: 600;
+    color: var(--text-primary);
+  }
+
+  .description {
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    color: var(--text-secondary);
+  }
+</style>

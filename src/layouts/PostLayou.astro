@@ -2,17 +2,30 @@
 import { SITE } from '@config'
 import BaseLayout from './BaseLayout.astro'
 import PageLayout from './PageLayout.astro'
+import type { CollectionEntry } from 'astro:content'
 
-const { frontmatter } = Astro.props
+const { post } = Astro.props
+
+export interface Props {
+  post: CollectionEntry<'blog'>
+}
+
+const { title, author, description, pubDatetime, modDatetime, tags } = post.data
+
+const { Content } = await post.render()
 
 const baseLayoutProps = {
-  title: `${frontmatter.title} | ${SITE.title}`,
-  author: frontmatter.author,
-  description: frontmatter.description,
-  pubDatetime: frontmatter.pubDatetime,
-  modDatetime: frontmatter.modDatetime,
+  title: `${title} | ${SITE.title}`,
+  author,
+  description,
+  pubDatetime,
+  modDatetime,
   scrollSmooth: true,
 }
 ---
 
-<BaseLayout />
+<BaseLayout {...baseLayoutProps}>
+  <PageLayout>
+    <slot />
+  </PageLayout>
+</BaseLayout>

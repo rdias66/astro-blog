@@ -1,31 +1,35 @@
 ---
-const { pubDatetime, modDatetime, size = "sm", class: customClass = "" } = Astro.props;
+const { pubDatetime, modDatetime, class: customClass = '' } = Astro.props
 
-const myDatetime = new Date(modDatetime && modDatetime > pubDatetime ? modDatetime : pubDatetime);
+const myDatetime = new Date(
+  modDatetime && modDatetime > pubDatetime ? modDatetime : pubDatetime,
+)
 
-const date = myDatetime.toLocaleDateString('en-US', { // Replace 'en-US' with LOCALE.langTag if necessary
-  year: "numeric",
-  month: "short",
-  day: "numeric",
-});
+const date = myDatetime.toLocaleDateString('en-US', {
+  // Replace 'en-US' with LOCALE.langTag if necessary
+  year: 'numeric',
+  month: 'short',
+  day: 'numeric',
+})
 
-const time = myDatetime.toLocaleTimeString('en-US', { // Replace 'en-US' with LOCALE.langTag if necessary
-  hour: "2-digit",
-  minute: "2-digit",
-});
+const time = myDatetime.toLocaleTimeString('en-US', {
+  // Replace 'en-US' with LOCALE.langTag if necessary
+  hour: '2-digit',
+  minute: '2-digit',
+})
 ---
 
 <div class={`datetime-container ${customClass}`}>
   <i class="icon fa-solid fa-calendar-days"></i>
-  {modDatetime && modDatetime > pubDatetime ? (
-    <span class={`datetime-text ${size === "sm" ? "text-sm" : "text-lg"}`}>
-      Updated:
-    </span>
-  ) : (
-    <span class="sr-only">Published:</span>
-  )}
-  <span class={`datetime-text ${size === "sm" ? "text-sm" : "text-lg"}`}>
-    <time dateTime={myDatetime.toISOString()}>
+  {
+    modDatetime && modDatetime > pubDatetime ? (
+      <span class="datetime-text">Modificado:</span>
+    ) : (
+      <span class="sr-only">Publicado:</span>
+    )
+  }
+  <span class="datetime-text" }>
+    <time datetime={myDatetime.toISOString()}>
       {date}
     </time>
     <span aria-hidden="true"> | </span>
@@ -41,19 +45,10 @@ const time = myDatetime.toLocaleTimeString('en-US', { // Replace 'en-US' with LO
     gap: 0.5rem;
     opacity: 0.8;
   }
-  .icon {
-    font-family: 'Font Awesome 5 Free';
-    font-weight: 900;
-  }
   .datetime-text {
     font-style: italic;
   }
-  .text-sm {
-    font-size: 0.875rem;
-  }
-  .text-lg {
-    font-size: 1rem;
-  }
+
   .sr-only {
     position: absolute;
     width: 1px;
