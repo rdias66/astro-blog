@@ -14,29 +14,31 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured)
 
 const introImage =
   'https://github.com/rdias66/astro-blogfolio-assets/blob/main/images/blog-assets/et-home.png?raw=true'
-const introTitle = 'Olá.'
+const introTitle = 'Boas-vindas'
 const intro =
-  'Seja bem-vindo ao meu blog profissional! Aqui, compartilho posts de tutoriais e projetos voltados para o aprendizado prático, com o objetivo de dividir experiências e fortalecer o conhecimento adquirido ao longo da minha jornada como desenvolvedor júnior. O foco deste espaço é mostrar de forma clara e didática o desenvolvimento completo de aplicações, desde estagios iniciais de planejamento back e frontend, até fluxos de DevOps.'
+  'Este é o meu blog profissional. Aqui, compartilho conteúdo de tutoriais e projetos voltados para o aprendizado prático, com o objetivo de dividir experiências e fortalecer o conhecimento adquirido ao longo da minha jornada como desenvolvedor júnior. O foco deste espaço é mostrar de forma clara e didática o desenvolvimento completo de aplicações, desde estagios iniciais de planejamento back e frontend, até fluxos de DevOps.'
 ---
 
 <BaseLayout>
   <PageLayout>
     <div class="intro-container">
-      <div class="article-container">
-        <code class="title-red">{introTitle}</code>
-        <article class="intro-article">
-          <code class="sub-title">{intro}</code>
-        </article>
+      <div class="title-container">
+        <h1 class="title-red">{introTitle}</h1>
+        <div class="image-container">
+          <img src={introImage} alt="et-home" />
+        </div>
       </div>
-      <div class="image-container">
-        <img src={introImage} alt="et-home" />
-      </div>
+
+      <article class="intro-article">
+        <p class="text-block">{intro}</p>
+      </article>
     </div>
     <Separator thin={true} />
+
     {
       featuredPosts.length > 0 && (
         <>
-          <section id="featured">
+          <section id="featured" class="post-list">
             <h2>Featured</h2>
             <ul>
               {featuredPosts.map(({ data, slug }) => (
@@ -48,7 +50,6 @@ const intro =
               ))}
             </ul>
           </section>
-          {recentPosts.length > 0 && <Separator thin={true} />}
         </>
       )
     }
@@ -81,7 +82,7 @@ const intro =
       margin: 20px 0;
     }
 
-    .article-container {
+    .title-container {
       margin-bottom: 20px;
     }
 
@@ -92,7 +93,7 @@ const intro =
     }
 
     .image-container img {
-      max-width: 100%;
+      max-width: 50%;
       height: auto;
       display: block;
       margin: 0 auto;
@@ -102,23 +103,27 @@ const intro =
       margin-top: 2rem;
     }
 
+    .post-list {
+      margin-top: 1rem;
+    }
     @media (min-width: 768px) {
       .intro-container {
-        display: flex;
         justify-items: baseline;
         align-items: start;
         text-align: left;
       }
 
-      .article-container {
-        flex: 1;
-        margin-right: 20px;
+      .title-container {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-top: 20px;
+
         color: var(--primary-color);
-        padding: 1rem;
       }
       .image-container {
-        flex: 0 0 40%;
-        margin-top: 3.5rem;
+        flex: 0 0 20%;
+        margin-right: 2.5rem;
       }
     }
   </style>

@@ -26,10 +26,13 @@
 }
 
 
-body {
+html, body {
+  height: 100%;
+  overflow: hidden;
   background-color: var(--background-color);
   color: var(--text-primary);
   transition: background-color 0.3s ease, color 0.3s ease;
+  font-family: "Roboto Mono", monospace;
 }
 
 /* Global layout settings */
@@ -42,12 +45,14 @@ body {
 /* Typography */
 .title {
   color: var(--text-primary);
-  font-size: 42px;
+  font-size: 54px;
+  font-family: "Roboto Slab", serif;
 }
 
 .title-red {
   color: var(--primary-color);
   font-size: 54px;
+  font-family: "Roboto Slab", serif;
  
 }
 
@@ -56,9 +61,15 @@ body {
   font-size: 17px;
 }
 
+.text-block {
+  color: var(--text-primary);
+  font-size: 0.875rem;
+  line-height: 1.75;
+}
+
 @media (min-width: 769px) {
   body {
-    width: 50%;
+    width: 60%;
     margin: 0 auto;
   }
 }

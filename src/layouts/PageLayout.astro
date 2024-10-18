@@ -10,18 +10,29 @@ import Footer from '@components/Footer.astro'
 <Footer />
 
 <style>
+  /* Make the .page-layout take up the remaining height between header and footer */
   .page-layout {
-    height: calc(100vh - 12rem);
+    height: calc(100vh - 11rem); /* Adjust height based on header and footer */
     padding: 2rem 1rem;
     margin: 0 auto;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
+    overflow-y: auto; /* Enable scrolling within the content area */
   }
 
+  /* Hide scrollbars for WebKit-based browsers */
+  .page-layout::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Hide scrollbars for Firefox */
+  .page-layout {
+    scrollbar-width: none;
+  }
+
+  /* Ensure content fits well on larger screens */
   @media (min-width: 768px) {
     .page-layout {
+      max-height: calc(100vh - 12rem);
       max-width: var(--max-content-width);
-      height: calc(100vh - 12rem);
     }
   }
 </style>
