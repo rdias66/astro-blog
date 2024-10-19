@@ -35,24 +35,24 @@ const nextPost =
   currentPostIndex !== allPosts.length ? allPosts[currentPostIndex + 1] : null
 ---
 
-<div class="back-button-container">
+<div id="main-content" class="back-button-container">
   <button
     class="back-button"
     onclick="(() => (history.length === 1) ? window.location = '/' : history.back())()"
   >
-    <i class="fa-solid fa-arrow-left"></i>
-    <span>Voltar</span>
+    <svg class="icon">
+      <use href={`/icons.svg#go-back`}> </use>
+    </svg>
   </button>
+
+  <a href="#end">
+    <span>Post end</span>
+  </a>
 </div>
 
-<main id="main-content">
+<main>
   <h1 class="post-title">{title}</h1>
-  <DateCard
-    pubDatetime={pubDatetime}
-    modDatetime={modDatetime}
-    size="lg"
-    className="datetime"
-  />
+  <DateCard pubDatetime={pubDatetime} modDatetime={modDatetime} />
   <article id="article" class="article-content">
     <Content />
   </article>
@@ -64,11 +64,13 @@ const nextPost =
 
 <Separator thin={true} />
 
-<div class="post-navigation">
+<div id="end" class="post-navigation">
   {
     prevPost && (
       <a href={`/posts/${prevPost.slug}`} class="prev-post">
-        <i class="fa-solid fa-angle-left" />
+        <svg class="icon">
+          <use href={`/icons.svg#arrow-left`}> </use>
+        </svg>
         <div>
           <span>Post anterior</span>
           <div class="post-title-sm">{prevPost.title}</div>
@@ -76,6 +78,12 @@ const nextPost =
       </a>
     )
   }
+  <a href="#main-content">
+    <svg class="icon">
+      <use href={`/icons.svg#arrow-up`}></use>
+    </svg>
+    <span>Voltar ao Topo</span>
+  </a>
   {
     nextPost && (
       <a href={`/posts/${nextPost.slug}`} class="next-post">
@@ -83,8 +91,106 @@ const nextPost =
           <span>Proximo Post</span>
           <div class="post-title-sm">{nextPost.title}</div>
         </div>
-        <i class="fa-solid fa-angle-right" />
+        <svg class="icon">
+          <use href={`/icons.svg#arrow-right`}> </use>
+        </svg>
       </a>
     )
   }
 </div>
+
+<style>
+  .back-button-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+  }
+
+  .back-button {
+    display: flex;
+    align-items: center;
+
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .back-button:hover {
+    background-color: var(--button-bg-hover);
+  }
+
+  .post-title {
+    font-size: 2rem;
+    font-weight: bold;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+  }
+
+  .article-content {
+    font-size: 1rem;
+    line-height: 1.75rem;
+    color: var(--text-primary);
+  }
+
+  .tag-list {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .post-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 2rem;
+  }
+
+  .prev-post,
+  .next-post {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--text-link);
+    text-decoration: none;
+    transition: color 0.3s;
+    padding: 1rem;
+  }
+
+  .prev-post:hover,
+  .next-post:hover {
+    color: var(--text-link-hover);
+  }
+
+  .post-title-sm {
+    font-size: 1rem;
+    font-weight: bold;
+    color: var(--text-primary);
+  }
+
+  .icon {
+    transition: color 0.5s;
+    width: 1rem;
+    height: 1rem;
+    color: var(--text-primary);
+    fill: var(--text-primary);
+  }
+  .back-to-top-button {
+    display: flex;
+    align-items: center;
+    background-color: var(--button-bg);
+    color: var(--button-text);
+    border: none;
+    border-radius: 0.25rem;
+    padding: 1rem;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .back-to-top-button:hover {
+    background-color: var(--button-bg-hover);
+  }
+</style>

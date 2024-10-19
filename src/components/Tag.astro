@@ -14,11 +14,11 @@ const slug = slugifyStr(tag)
   .tech-badge {
     display: inline-flex;
     align-items: center;
-    background-color: var(--bg-secondary);
+    background-color: var(--primary-color);
     border-radius: 12px;
     padding: 6px 12px;
     text-decoration: none;
-    color: var(--text-primary);
+    color: white;
     transition:
       background-color 0.3s ease,
       transform 0.2s ease;
@@ -31,7 +31,7 @@ const slug = slugifyStr(tag)
   }
 
   .tech-badge:hover {
-    background-color: #cf37a9;
+    background-color: var(--secondary-color);
     transform: scale(1.05);
   }
 

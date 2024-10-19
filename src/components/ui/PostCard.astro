@@ -1,9 +1,10 @@
 ---
 import { slugifyStr } from '@utils/slugify'
 import DateCard from './DateCard.astro'
+import Tag from '@components/Tag.astro'
 
 const { href, frontmatter, secHeading = true } = Astro.props
-const { title, pubDatetime, modDatetime, description } = frontmatter
+const { title, pubDatetime, modDatetime, description, tags } = frontmatter
 
 const headerProps = {
   style: { viewTransitionName: slugifyStr(title) },
@@ -26,6 +27,9 @@ const headerProps = {
   </a>
   <DateCard pubDatetime={pubDatetime} modDatetime={modDatetime} />
   <code class="description">{description}</code>
+  <ul class="tag-list">
+    {tags.map((tag) => <Tag tag={tag} />)}
+  </ul>
 </li>
 
 <style>
@@ -69,5 +73,13 @@ const headerProps = {
 
   li {
     list-style-type: none;
+  }
+
+  .tag-list {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 1.5rem;
+    list-style: none;
+    padding: 0;
   }
 </style>
