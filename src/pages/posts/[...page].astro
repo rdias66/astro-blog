@@ -1,0 +1,22 @@
+---
+import { SITE } from '@config'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import MultiplePostsLayout from '@layouts/MultiplePostsLayout.astro'
+import PageLayout from '@layouts/PageLayout.astro'
+import type { GetStaticPaths } from 'astro'
+import { getCollection } from 'astro:content'
+import { getSortedPosts } from '@utils/post.utils'
+
+export const getStaticPaths = (async ({ paginate }) => {
+  const posts = await getCollection('blog', ({ data }) => !data.draft)
+  return paginate(getSortedPosts(posts), { pageSize: SITE.postPerPage })
+}) satisfies GetStaticPaths
+
+const { page } = Astro.props
+---
+
+<BaseLayout title={`Posts | ${SITE.title}`}>
+  <PageLayout>
+    <MultiplePostsLayout page={page} />
+  </PageLayout>
+</BaseLayout>

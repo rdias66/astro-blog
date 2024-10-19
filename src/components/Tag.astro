@@ -1,0 +1,41 @@
+---
+import { slugifyStr } from '@utils/slugify'
+
+const { tag } = Astro.props
+
+const slug = slugifyStr(tag)
+---
+
+<a href={`/tags/${slug}`} class="tech-badge">
+  <span>{tag}</span>
+</a>
+
+<style>
+  .tech-badge {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--bg-secondary);
+    border-radius: 12px;
+    padding: 6px 12px;
+    text-decoration: none;
+    color: var(--text-primary);
+    transition:
+      background-color 0.3s ease,
+      transform 0.2s ease;
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .tech-badge span {
+    display: block;
+  }
+
+  .tech-badge:hover {
+    background-color: #cf37a9;
+    transform: scale(1.05);
+  }
+
+  .tech-badge:active {
+    transform: scale(1);
+  }
+</style>

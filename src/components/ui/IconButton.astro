@@ -17,20 +17,25 @@ const { ref } = Astro.props as { ref: Ref }
   rel="noopener noreferrer"
   aria-label={ref.name}
 >
-  <i class={`${ref.icon} icon`}></i>
+  <svg class="icon">
+    <use href={`/icons.svg#${ref.icon}`}> </use>
+  </svg>
+
+  <style>
+    .icon {
+      transition: color 0.5s;
+      width: 1rem;
+      height: 1rem;
+      color: var(--text-primary);
+      fill: var(--text-primary);
+    }
+
+    a:hover {
+      cursor: pointer;
+    }
+
+    a:hover .icon {
+      color: var(--text-secondary);
+    }
+  </style>
 </a>
-
-<style>
-  .icon {
-    transition: color 0.5s;
-    color: var(--text-primary);
-  }
-
-  a:hover {
-    cursor: pointer;
-  }
-
-  a:hover .icon {
-    color: var(--text-secondary);
-  }
-</style>

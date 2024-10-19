@@ -6,14 +6,12 @@ const myDatetime = new Date(
 )
 
 const date = myDatetime.toLocaleDateString('en-US', {
-  // Replace 'en-US' with LOCALE.langTag if necessary
   year: 'numeric',
   month: 'short',
   day: 'numeric',
 })
 
 const time = myDatetime.toLocaleTimeString('en-US', {
-  // Replace 'en-US' with LOCALE.langTag if necessary
   hour: '2-digit',
   minute: '2-digit',
 })

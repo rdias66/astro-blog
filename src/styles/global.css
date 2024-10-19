@@ -10,6 +10,7 @@
 /* Global styles */
 :root {
   --background-color: #2c2828;
+  --bg-secondary: #7a1200;
   --primary-color: #ff6666; 
   --secondary-color: #c926c1; 
   --text-primary: white;
@@ -19,6 +20,7 @@
 
 [data-theme='light'] {
   --background-color: #f7ecec; 
+  --bg-secondary: #d65454;
   --primary-color: #c926c1; 
   --secondary-color: #ff6666; 
   --text-primary: rgb(0, 0, 0);
@@ -60,6 +62,12 @@ html, body {
   color: var(--text-primary);
   font-size: 17px;
 }
+
+.sub-title-red {
+  color: var(--primary-color);
+  font-size: 32px;
+}
+
 
 .text-block {
   color: var(--text-primary);

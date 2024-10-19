@@ -25,10 +25,10 @@ function reflectPreference() {
   document.firstElementChild.setAttribute('data-theme', themeValue)
   document.querySelector('#theme-btn')?.setAttribute('aria-label', themeValue)
 
-  const themeButton = document.querySelector('#theme-btn i')
+  const themeButton = document.querySelector('#theme-btn svg')
   if (themeButton) {
-    themeButton.className =
-      themeValue === 'light' ? 'fa-solid fa-moon' : 'fa-solid fa-sun'
+    const iconId = themeValue === 'light' ? 'moon' : 'sun'
+    themeButton.innerHTML = `<svg class="icon"><use href="/icons.svg#${iconId}"></use></svg>`
   }
 
   const body = document.body

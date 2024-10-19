@@ -1,0 +1,147 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro'
+import PageLayout from '@layouts/PageLayout.astro'
+import { getCollection, type CollectionEntry } from 'astro:content'
+import { slugifyStr } from '@utils/slugify'
+import { SITE } from '@config'
+import { getSortedPosts } from '@utils/post.utils'
+import PostLayout from '@layouts/PostLayout.astro'
+
+export interface Props {
+  post: CollectionEntry<'blog'>
+  posts: CollectionEntry<'blog'>[]
+}
+
+const { post } = Astro.props
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft)
+
+  const postResult = posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }))
+
+  return postResult
+}
+
+const {
+  title,
+  author,
+  description,
+  ogImage,
+  canonicalURL,
+  pubDatetime,
+  modDatetime,
+  tags,
+} = post.data
+
+const ogImageUrl = typeof ogImage === 'string' ? ogImage : ogImage?.src
+const ogUrl = new URL(
+  ogImageUrl ?? `/posts/${slugifyStr(title)}.png`,
+  Astro.url.origin,
+).href
+
+const layoutProps = {
+  title: `${title} | ${SITE.title}`,
+  author,
+  description,
+  pubDatetime,
+  modDatetime,
+  canonicalURL,
+  ogImage: ogUrl,
+  scrollSmooth: true,
+}
+
+const posts = await getCollection('blog')
+const sortedPosts = getSortedPosts(posts)
+---
+
+<BaseLayout {...layoutProps}>
+  <PageLayout>
+    <PostLayout post={post} posts={sortedPosts} />
+  </PageLayout>
+</BaseLayout>
+<style>
+  .back-button-container {
+    margin: 32px auto 8px auto;
+    display: flex;
+    justify-content: flex-start;
+    max-width: 768px;
+    padding: 0 8px;
+  }
+  .back-button {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+  .back-button:hover {
+    opacity: 0.75;
+  }
+  main {
+    margin: 0 auto;
+    width: 100%;
+    max-width: 768px;
+    padding: 0 16px 48px;
+  }
+  .post-title {
+    font-size: 2rem;
+    font-weight: 600;
+    color: #333;
+  }
+  .datetime {
+    margin: 16px 0;
+  }
+  .article-content {
+    margin-top: 32px;
+    max-width: 768px;
+  }
+  .tag-list {
+    margin: 32px 0;
+  }
+  .navigation-buttons {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+  }
+  .back-to-top-button {
+    padding: 8px;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+  .back-to-top-button:hover {
+    opacity: 0.75;
+  }
+  .separator {
+    margin: 24px 0;
+    border-top: 1px dashed #ccc;
+  }
+  .post-navigation {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+  .post-navigation a {
+    display: flex;
+    align-items: center;
+    transition: opacity 0.2s ease;
+  }
+  .prev-post {
+    gap: 8px;
+  }
+  .next-post {
+    justify-content: flex-end;
+    gap: 8px;
+    text-align: right;
+  }
+  .post-navigation a:hover {
+    opacity: 0.75;
+  }
+  .post-title-sm {
+    font-size: 0.875rem;
+    color: #888;
+  }
+</style>

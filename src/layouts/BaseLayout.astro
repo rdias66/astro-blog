@@ -96,8 +96,8 @@ const structuredData = {
       set:html={JSON.stringify(structuredData)}
     />
     <meta name="theme-color" content="" />
-    <ViewTransitions />
 
+    <ViewTransitions />
     <script is:inline>
       ;(function () {
         const savedTheme = localStorage.getItem('theme') || 'dark'
@@ -105,9 +105,7 @@ const structuredData = {
       })()
     </script>
     <script is:inline src="/scripts/theme-toggle.js" async></script>
-    <script
-      src="https://kit.fontawesome.com/9edb9e3e09.js"
-      crossorigin="anonymous"></script>
+
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -115,6 +113,7 @@ const structuredData = {
       rel="stylesheet"
     />
   </head>
+
   <body>
     <slot />
   </body>

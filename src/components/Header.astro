@@ -15,14 +15,14 @@ const { activeNav } = Astro.props
 
 const searchRef: Ref = {
   name: 'Search',
-  icon: 'fa-solid fa-magnifying-glass',
+  icon: 'search',
   url: '/search',
   blank: false,
 }
 
 let themeRef: Ref = {
   name: 'Theme Icon',
-  icon: 'fa-solid fa-sun',
+  icon: 'sun',
   id: 'theme-btn',
 }
 ---
@@ -46,11 +46,7 @@ let themeRef: Ref = {
         <code class="nav-item">Tags</code>
       </a>
     </li>
-    <li>
-      <a href="/about/" class={activeNav === 'about' ? 'active' : ''}>
-        <code class="nav-item">About</code>
-      </a>
-    </li>
+
     <li>
       <IconButton ref={searchRef} />
     </li>

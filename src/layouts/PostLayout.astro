@@ -1,0 +1,90 @@
+---
+import Tag from '@components/Tag.astro'
+import DateCard from '@components/ui/DateCard.astro'
+import { getCollection, type CollectionEntry } from 'astro:content'
+//import ShareLinks from "@components/ShareLinks.astro";
+import Separator from '@components/Separator.astro'
+export interface Props {
+  post: CollectionEntry<'blog'>
+  posts: CollectionEntry<'blog'>[]
+}
+const { post, posts } = Astro.props
+const { title, pubDatetime, modDatetime, tags } = post.data
+
+const { Content } = await post.render()
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.draft)
+
+  const postResult = posts.map((post) => ({
+    params: { slug: post.slug },
+    props: { post },
+  }))
+
+  return postResult
+}
+
+const allPosts = posts.map(({ data: { title }, slug }) => ({
+  slug,
+  title,
+}))
+
+const currentPostIndex = allPosts.findIndex((a) => a.slug === post.slug)
+
+const prevPost = currentPostIndex !== 0 ? allPosts[currentPostIndex - 1] : null
+const nextPost =
+  currentPostIndex !== allPosts.length ? allPosts[currentPostIndex + 1] : null
+---
+
+<div class="back-button-container">
+  <button
+    class="back-button"
+    onclick="(() => (history.length === 1) ? window.location = '/' : history.back())()"
+  >
+    <i class="fa-solid fa-arrow-left"></i>
+    <span>Voltar</span>
+  </button>
+</div>
+
+<main id="main-content">
+  <h1 class="post-title">{title}</h1>
+  <DateCard
+    pubDatetime={pubDatetime}
+    modDatetime={modDatetime}
+    size="lg"
+    className="datetime"
+  />
+  <article id="article" class="article-content">
+    <Content />
+  </article>
+
+  <ul class="tag-list">
+    {tags.map((tag) => <Tag tag={tag} />)}
+  </ul>
+</main>
+
+<Separator thin={true} />
+
+<div class="post-navigation">
+  {
+    prevPost && (
+      <a href={`/posts/${prevPost.slug}`} class="prev-post">
+        <i class="fa-solid fa-angle-left" />
+        <div>
+          <span>Post anterior</span>
+          <div class="post-title-sm">{prevPost.title}</div>
+        </div>
+      </a>
+    )
+  }
+  {
+    nextPost && (
+      <a href={`/posts/${nextPost.slug}`} class="next-post">
+        <div>
+          <span>Proximo Post</span>
+          <div class="post-title-sm">{nextPost.title}</div>
+        </div>
+        <i class="fa-solid fa-angle-right" />
+      </a>
+    )
+  }
+</div>
