@@ -1,12 +1,8 @@
 ---
-import { slugifyStr } from '@utils/slugify'
-
 const { tag } = Astro.props
-
-const slug = slugifyStr(tag)
 ---
 
-<a href={`/tags/${slug}`} class="tech-badge">
+<a href={`/tags/${tag}/`} class="tech-badge">
   <span>{tag}</span>
 </a>
 

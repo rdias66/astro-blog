@@ -9,90 +9,29 @@ import { getCollection } from 'astro:content'
 const posts = await getCollection('blog')
 
 let tags = getUniqueTags(posts)
-const { page } = Astro.props
 ---
 
 <BaseLayout title={`Tags | ${SITE.title}`}>
   <PageLayout>
     <h1 class="title-red">Todas as tags</h1>
-    <ul>
-      {tags.map(({ tag }) => <Tag {tag} size="lg" />)}
+    <ul class="tag-list">
+      {tags.map(({ tag }) => <Tag {tag} />)}
     </ul>
-    {
-      page.lastPage > 1 && (
-        <nav class="pagination-wrapper" aria-label="Pagination">
-          <a
-            href={page.url.prev as string}
-            class={`mx-4 button ${!page.url.prev ? 'disabled' : ''}`}
-            aria-label="Previous"
-            aria-disabled={!page.url.prev ? 'true' : 'false'}
-          >
-            <svg class="icon">
-              <use href={`/icons.svg#arrow-left`}> </use>
-            </svg>
-          </a>
-          <div class="mt-1">
-            {page.currentPage} / {page.lastPage}
-          </div>
-          <a
-            href={page.url.next as string}
-            class={`mx-4 button ${!page.url.next ? 'disabled' : ''}`}
-            aria-label="Next"
-            aria-disabled={!page.url.next ? 'true' : 'false'}
-          >
-            <svg class="icon">
-              <use href={`/icons.svg#arrow-right`}> </use>
-            </svg>
-          </a>
-        </nav>
-      )
-    }
   </PageLayout>
 </BaseLayout>
 
 <style>
-  .pagination-wrapper {
-    margin-bottom: 2rem;
+  .tag-list {
     display: flex;
-    justify-content: center;
-    padding: 1rem;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    justify-content: start;
+    padding: 0.5rem;
+    margin: 0;
+    list-style: none;
   }
 
-  .button {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    background-color: var(--primary-color);
-    color: white;
-    text-decoration: none;
-    transition: background-color 0.3s;
-  }
-
-  .button:hover {
-    background-color: var(--secondary-color);
-  }
-
-  .mx-4 {
-    margin-left: 1rem;
-    margin-right: 1rem;
-  }
-
-  .mt-1 {
-    margin-top: 0.2rem;
-  }
-
-  .disabled {
-    pointer-events: none;
-    opacity: 0.5;
-  }
-
-  .icon {
-    width: 1rem;
-    height: 1rem;
-    color: var(--text-primary);
-    fill: var(--text-primary);
-    transition: color 0.5s;
+  .tag-list li {
+    margin-bottom: 12px;
   }
 </style>
