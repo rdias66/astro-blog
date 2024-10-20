@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content'
+import { getUniqueTags, getPostsByTag } from '@utils/tag.utils'
+import type { GetStaticPathsOptions } from 'astro'
+import { SITE } from '@config'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import PageLayout from '@layouts/PageLayout.astro'
+import PostCard from '@components/ui/PostCard.astro'
+
+export async function getStaticPaths({ paginate }: GetStaticPathsOptions) {
+  const posts = await getCollection('blog')
+  const tags = getUniqueTags(posts)
+
+  return tags.flatMap(({ tag, tagName }) => {
+    const tagPosts = getPostsByTag(posts, tag)
+
+    return paginate(tagPosts, {
+      params: { tag },
+      props: { tagName },
+      pageSize: SITE.postPerPage,
+    })
+  })
+}
+
+const params = Astro.params
+const { tag } = params
+const { page, tagName } = Astro.props
+---
+
+<BaseLayout title={`Tag: ${tagName}`}>
+  <PageLayout>
+    <h1 slot="title" transition:name={tag}>{`Tag:${tag}`}</h1>
+    <ul>
+      {
+        page.data.map(({ data, slug }) => (
+          <PostCard href={`/posts/${slug}/`} frontmatter={data} />
+        ))
+      }
+    </ul>
+  </PageLayout>
+</BaseLayout>
