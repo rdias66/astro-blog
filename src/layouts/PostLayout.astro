@@ -53,7 +53,8 @@ const nextPost =
 <main>
   <h1 class="post-title">{title}</h1>
   <DateCard pubDatetime={pubDatetime} modDatetime={modDatetime} />
-  <article id="article" class="article-content">
+
+  <article id="article" class="prose article-content">
     <Content />
   </article>
 
@@ -109,7 +110,6 @@ const nextPost =
   .back-button {
     display: flex;
     align-items: center;
-
     background-color: var(--button-bg);
     color: var(--button-text);
     border: none;
@@ -133,12 +133,15 @@ const nextPost =
     font-size: 1rem;
     line-height: 1.75rem;
     color: var(--text-primary);
+    margin-top: 2rem;
+    justify-content: center;
   }
 
   .tag-list {
     display: flex;
     gap: 0.5rem;
     margin-top: 1.5rem;
+    margin-bottom: 1.5rem;
     list-style: none;
     padding: 0;
   }
@@ -154,7 +157,6 @@ const nextPost =
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: var(--text-link);
     text-decoration: none;
     transition: color 0.3s;
     padding: 1rem;
@@ -162,7 +164,7 @@ const nextPost =
 
   .prev-post:hover,
   .next-post:hover {
-    color: var(--text-link-hover);
+    color: var(--text-secondary);
   }
 
   .post-title-sm {
@@ -178,6 +180,7 @@ const nextPost =
     color: var(--text-primary);
     fill: var(--text-primary);
   }
+
   .back-to-top-button {
     display: flex;
     align-items: center;
@@ -192,5 +195,99 @@ const nextPost =
 
   .back-to-top-button:hover {
     background-color: var(--button-bg-hover);
+  }
+
+  /* Tailwind CSS Configurations Applied Here */
+  .prose {
+    margin-bottom: 1rem;
+    color: var(--text-primary);
+  }
+
+  .prose h2,
+  .prose h3,
+  .prose h4,
+  .prose h5,
+  .prose h6 {
+    margin-bottom: 0.75rem;
+    color: var(--text-secondary);
+  }
+
+  .prose h3 {
+    font-style: italic;
+  }
+
+  .prose p,
+  .prose a,
+  .prose figcaption,
+  .prose strong {
+    color: var(--text-primary);
+    opacity: 1;
+  }
+
+  .prose a {
+    text-decoration: underline;
+    text-underline-offset: 0.5rem;
+    text-decoration: dashed;
+    transition: color 0.3s;
+  }
+
+  .prose a:hover {
+    color: var(--accent-color);
+  }
+
+  .prose blockquote {
+    border-left: 4px solid rgba(255, 0, 0, 0.5);
+    opacity: 0.8;
+  }
+
+  .prose code {
+    border-radius: 0.25rem;
+    background-color: rgba(255, 255, 255, 0.75);
+    padding: 0.25rem;
+  }
+
+  .prose ul,
+  .prose ol {
+    color: var(--text-primary);
+    list-style-position: inside;
+  }
+
+  .prose li {
+    color: var(--accent-color);
+  }
+
+  .prose th,
+  .prose td {
+    border: 1px solid var(--border-color);
+  }
+
+  .prose img {
+    margin: 0.5rem 0;
+    display: block;
+    border: 2px solid var(--border-color);
+  }
+
+  .prose details {
+    display: inline-block;
+    cursor: pointer;
+    color: var(--text-primary);
+  }
+
+  .prose summary {
+    outline: none;
+  }
+
+  .prose h2#table-of-contents + p {
+    display: none;
+  }
+
+  .prose thead th:first-child,
+  .prose tbody td:first-child,
+  .prose tfoot td:first-child {
+    padding-left: 0.5714286em;
+  }
+
+  .prose h2#table-of-contents {
+    margin-bottom: 0.5rem;
   }
 </style>

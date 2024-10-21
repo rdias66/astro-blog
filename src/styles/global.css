@@ -15,7 +15,8 @@
   --secondary-color: #c926c1; 
   --text-primary: white;
   --text-secondary: rgba(255, 255, 255, 0.644);
-    --max-content-width: 1600px; 
+  --max-content-width: 1600px;
+  --article-title-color: #ff6666; 
 }
 
 [data-theme='light'] {
@@ -25,8 +26,10 @@
   --secondary-color: #ff6666; 
   --text-primary: rgb(0, 0, 0);
   --text-secondary: rgba(65, 63, 63, 0.644); 
+  --article-title-color: #d65454;
+  --accent-color: aqua;
+  --border-color: #da80e5;
 }
-
 
 html, body {
   height: 100%;
@@ -55,7 +58,6 @@ html, body {
   color: var(--primary-color);
   font-size: 54px;
   font-family: "Roboto Slab", serif;
- 
 }
 
 .sub-title {
@@ -68,11 +70,116 @@ html, body {
   font-size: 32px;
 }
 
-
 .text-block {
   color: var(--text-primary);
   font-size: 0.875rem;
   line-height: 1.75;
+}
+
+/* Prose Styles */
+.prose {
+  max-width: var(--max-content-width);
+  margin: 0 auto;
+  line-height: 1.6;
+  padding: 2rem; /* Added padding for better spacing */
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  color: var(--article-title-color);
+  margin-bottom: 1rem;
+}
+
+.prose p {
+  color: var(--text-primary);
+  margin-bottom: 1rem;
+}
+
+.prose a {
+  color: var(--primary-color);
+  text-decoration: underline;
+  transition: color 0.3s ease;
+}
+
+.prose a:hover {
+  color: var(--secondary-color);
+}
+
+.prose blockquote {
+  border-left: 4px solid var(--primary-color);
+  margin: 1rem 0;
+  padding-left: 1rem;
+  color: var(--text-secondary);
+  font-style: italic; /* Style blockquotes */
+}
+
+.prose ul, .prose ol {
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+.prose li {
+  margin-bottom: 0.5rem;
+}
+
+/* Code Block Styles */
+.prose pre {
+  background-color: rgba(255, 255, 255, 0.1); /* Light background for code blocks */
+  color: #f8f8f2; /* Code text color */
+  padding: 1rem;
+  border-radius: 5px;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  font-size: 0.875rem; /* Smaller font for code */
+}
+
+.prose code {
+  background-color: rgba(8, 3, 3, 0.2); /* Light background for inline code */
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+}
+
+/* Table Styles */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+}
+
+.prose th, .prose td {
+  border: 1px solid var(--primary-color);
+  padding: 0.75rem;
+  text-align: left;
+}
+
+.prose th {
+  background-color: var(--bg-secondary);
+  color: var(--text-primary);
+}
+
+.prose tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.1); /* Zebra striping for tables */
+}
+
+/* Alert Styles */
+.alert {
+  padding: 1rem;
+  border: 1px solid var(--primary-color);
+  border-radius: 5px;
+  margin: 1.5rem 0;
+  color: var(--text-primary);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+.alert.success {
+  border-color: #28a745; /* Green for success */
+}
+
+.alert.error {
+  border-color: #dc3545; /* Red for error */
+}
+
+.alert.info {
+  border-color: #17a2b8; /* Blue for info */
 }
 
 @media (min-width: 769px) {
@@ -81,4 +188,3 @@ html, body {
     margin: 0 auto;
   }
 }
-
