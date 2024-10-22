@@ -76,12 +76,12 @@ html, body {
   line-height: 1.75;
 }
 
-/* Prose Styles */
+/* Article/Post Styles */
 .prose {
   max-width: var(--max-content-width);
   margin: 0 auto;
   line-height: 1.6;
-  padding: 2rem; /* Added padding for better spacing */
+  padding: 2rem; 
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {
@@ -109,7 +109,7 @@ html, body {
   margin: 1rem 0;
   padding-left: 1rem;
   color: var(--text-secondary);
-  font-style: italic; /* Style blockquotes */
+  font-style: italic; 
 }
 
 .prose ul, .prose ol {
@@ -123,17 +123,17 @@ html, body {
 
 /* Code Block Styles */
 .prose pre {
-  background-color: rgba(255, 255, 255, 0.1); /* Light background for code blocks */
-  color: #f8f8f2; /* Code text color */
+  background-color: rgba(255, 255, 255, 0.1); 
+  color: #f8f8f2; 
   padding: 1rem;
   border-radius: 5px;
   overflow-x: auto;
   margin: 1.5rem 0;
-  font-size: 0.875rem; /* Smaller font for code */
+  font-size: 0.875rem; 
 }
 
 .prose code {
-  background-color: rgba(8, 3, 3, 0.2); /* Light background for inline code */
+  background-color: rgba(8, 3, 3, 0.2); 
   padding: 0.2rem 0.4rem;
   border-radius: 4px;
 }
@@ -157,7 +157,7 @@ html, body {
 }
 
 .prose tr:nth-child(even) {
-  background-color: rgba(255, 255, 255, 0.1); /* Zebra striping for tables */
+  background-color: rgba(255, 255, 255, 0.1); 
 }
 
 /* Alert Styles */
@@ -171,15 +171,15 @@ html, body {
 }
 
 .alert.success {
-  border-color: #28a745; /* Green for success */
+  border-color: #28a745;
 }
 
 .alert.error {
-  border-color: #dc3545; /* Red for error */
+  border-color: #dc3545;
 }
 
 .alert.info {
-  border-color: #17a2b8; /* Blue for info */
+  border-color: #17a2b8;
 }
 
 @media (min-width: 769px) {
