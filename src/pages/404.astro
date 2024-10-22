@@ -1,0 +1,35 @@
+---
+import { SITE } from '@config'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import PageLayout from '@layouts/PageLayout.astro'
+const notFoundImage =
+  'https://github.com/rdias66/astro-blogfolio-assets/blob/main/images/blog-assets/404.png?raw=true'
+---
+
+<BaseLayout title={`404  | ${SITE.title}`}>
+  <PageLayout>
+    <div class="not-found-wrapper">
+      <h1>404</h1>
+      <div class="image-container">
+        <img src={notFoundImage} alt="not-found-image" />
+      </div>
+      <h2>Não há nada por aqui...</h2>
+      <a href="/">Voltar para página inicial</a>
+    </div>
+  </PageLayout>
+</BaseLayout>
+
+<style>
+  .not-found-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .image-container img {
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+</style>
