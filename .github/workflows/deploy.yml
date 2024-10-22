@@ -74,4 +74,4 @@ jobs:
 
     - name: Run the new Docker container
       run: |
-        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo docker run --name blog_app_1 --network frontend --restart unless-stopped -d 891377290474.dkr.ecr.sa-east-1.amazonaws.com/blogfolio/blog:latest"
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo docker run --name blog_app_1 --network blog --restart unless-stopped -d 891377290474.dkr.ecr.sa-east-1.amazonaws.com/blogfolio/blog:latest"
