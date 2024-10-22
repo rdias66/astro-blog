@@ -44,7 +44,7 @@ jobs:
       run: docker build -t blogfolio/blog .
 
     - name: Tag Docker image
-      run: docker tag blogfolio/frontend:latest 891377290474.dkr.ecr.sa-east-1.amazonaws.com/blogfolio/blog:latest
+      run: docker tag blogfolio/blog:latest 891377290474.dkr.ecr.sa-east-1.amazonaws.com/blogfolio/blog:latest
 
     - name: Push Docker image to ECR
       run: docker push 891377290474.dkr.ecr.sa-east-1.amazonaws.com/blogfolio/blog:latest
