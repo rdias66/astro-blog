@@ -44,8 +44,7 @@ jobs:
       with:
         key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
         known_hosts: |
-          ec2-15-228-23-138.sa-east-1.compute.amazonaws.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDdsIQQShWLEJX7JbjvEaXWINPazEko7z/pERXszY+7Vr6fLkaDNrBHRZONloj/uZbBpGfXmOFcH+ynZhVf6JD+IX9KxlCAXUztH+4o+43k/fkH2Te4yakiRdVppAU7m550dh/DBWms8soG5fH7DvLuI8nV82spyOClNmsx24cVjS4pz6/Z8z0f7QZ8VSBWYd4pBPE4ldC+Xdq8dnEzplv+2/fal3vrftN0WaYYJ1zGDsc4oxGOUhGgf0SiDiZSrjHBbYmquxn12RBWyR1ZbyPqyBUW1LGxO9r5nzbVNrLU+adSOEijIu19YI4HQT/EGsuJgKftt7vLGjnzo2QZbOMZK38YXSmRZXEKEFreE57BMCJlxcUG4cqx830VwfNX0ldpmrPcFoFDEi7vnIMKYcgn4EhXcPSzGVgd+ArgJobsvOleFlwu+e4hWhj7AE3RVVpSwxC41Q0yZwrHkFvh89ZBEHeEZyYC+Ha9s6ppcDyfdA6+0JAaxLk8Vdeh3ATQXN0=
-
+          ec2-15-228-23-138.sa-east-1.compute.amazonaws.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAACAQCpc7/HMeEOjWYVZK9ZhoBiY2fZcqwgMMQrJi+uOBvT+7S1BTjI6BvNJyhgdI9JLJBz+rb/dlSZyxatreOhCDkB1/bYi50+dsCpMp6ibIZWV7tJKAH5edostOdqLT3uuvaCYDu7nOqFhZto76dlymXLPmO2Rf869FJQ5UoGXBCBMT8FYTzd3BuaAhPQ8+pXkTjN9X/aOX0u7EaoUnl2DjAAW4PpXEdXcG9Zh6p350MT0RZE8jVEX7Eq7k8N80tiXg9U9UfDamQgWsTOWNn/Z8MAozmproFqvMlXsoQNKGVZJW6gyDR03K6uF9uKunSt+B+CH84+MaNRQ+NmpCcVf/2vrKbxq29kdB1JOZB2KVbp2jcxmNufuF3BjTdVgWpaC9j/e5m8MnQYwRvGG8JCzqDfaFQuOOO/QuoSyYsRhBaxA+/YXvA69JXxud7gkn+3k/VOuo7vR41sVWYHMN7SjqtzqMtYQYZOyTTSLILgr4gK8YBcZY+yAndDyRnC/sgvvltUZvlV3/q2BslpxxuU6OZOl5TMm+6Tt+hi5GuaZ/V6ZLSsJS/pDeAcXlsWEOA4PN6dRd+7qBYDLpCac2E8mq17+O7il1B+fPvUzaRNaD5Ro/xJKasS0vmu/8MUGQo7PgjfD/CVZmDJL0267h5UMQEq01soDmY8JWrymwrqGsVybQ== GitHub Actions Key
     - name: Copy Docker image to EC2
       run: |
         docker save blogfolio/blog | ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'sudo docker load'
