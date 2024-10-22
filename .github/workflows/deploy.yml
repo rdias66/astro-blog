@@ -1,0 +1,59 @@
+name: Build and Deploy
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Restore NPM cache
+      uses: actions/cache@v3
+      with:
+        path: ~/.npm
+        key: npm-packages-${{ hashFiles('package-lock.json') }}
+        restore-keys: npm-packages-
+
+    - name: Install dependencies
+      run: npm install
+
+    - name: Build application
+      run: npm run build
+
+  docker_build:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Build Docker image
+      run: docker build -t blogfolio/blog .
+
+  deploy:
+    needs: docker_build
+    runs-on: ubuntu-latest
+    steps:
+    - name: Add SSH key and known hosts
+      uses: shimataro/ssh-key-action@v2
+      with:
+        key: ${{ secrets.EC2_SSH_PRIVATE_KEY }}
+        known_hosts: |
+          ec2-15-228-23-138.sa-east-1.compute.amazonaws.com ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDdsIQQShWLEJX7JbjvEaXWINPazEko7z/pERXszY+7Vr6fLkaDNrBHRZONloj/uZbBpGfXmOFcH+ynZhVf6JD+IX9KxlCAXUztH+4o+43k/fkH2Te4yakiRdVppAU7m550dh/DBWms8soG5fH7DvLuI8nV82spyOClNmsx24cVjS4pz6/Z8z0f7QZ8VSBWYd4pBPE4ldC+Xdq8dnEzplv+2/fal3vrftN0WaYYJ1zGDsc4oxGOUhGgf0SiDiZSrjHBbYmquxn12RBWyR1ZbyPqyBUW1LGxO9r5nzbVNrLU+adSOEijIu19YI4HQT/EGsuJgKftt7vLGjnzo2QZbOMZK38YXSmRZXEKEFreE57BMCJlxcUG4cqx830VwfNX0ldpmrPcFoFDEi7vnIMKYcgn4EhXcPSzGVgd+ArgJobsvOleFlwu+e4hWhj7AE3RVVpSwxC41Q0yZwrHkFvh89ZBEHeEZyYC+Ha9s6ppcDyfdA6+0JAaxLk8Vdeh3ATQXN0=
+
+    - name: Copy Docker image to EC2
+      run: |
+        docker save blogfolio/blog | ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'sudo docker load'
+
+    - name: Remove existing Docker container
+      run: |
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo docker rm --force blog_app_1 || true"
+
+    - name: Run the new Docker container
+      run: |
+        ssh ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} "sudo docker run --name blog_app_1 --network frontend --restart unless-stopped -d blogfolio/blog:latest"
