@@ -5,10 +5,10 @@ title: Planejamento DevOps para deploy na AWS
 slug: planejamento-devops-para-deploy-aws
 featured: true
 tags:
-  - DevOps
-  - AWS 
-  - DAI-repo
-  - Github Actions
+  - devops
+  - aws 
+  - dai-repo
+  - github-actions
 description: Uma introdução ao planejamento requerido para um deploy completo na AWS, com a arquitetura da IaC, configurações de domínio, reverse proxy, containerização e setup de CI/CD.
 ---
 

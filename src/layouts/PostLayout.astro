@@ -45,9 +45,7 @@ const nextPost =
     </svg>
   </button>
 
-  <a href="#end">
-    <span>Post end</span>
-  </a>
+  <a href="#end"> Fim do post </a>
 </div>
 
 <main>
@@ -79,12 +77,7 @@ const nextPost =
       </a>
     )
   }
-  <a href="#main-content">
-    <svg class="icon">
-      <use href={`/icons.svg#arrow-up`}></use>
-    </svg>
-    <span>Voltar ao Topo</span>
-  </a>
+  <a href="#main-content" class="back-top"> Voltar ao topo </a>
   {
     nextPost && (
       <a href={`/posts/${nextPost.slug}`} class="next-post">
@@ -160,6 +153,9 @@ const nextPost =
     text-decoration: none;
     transition: color 0.3s;
     padding: 1rem;
+  }
+  .back-top {
+    margin-top: 1.5rem;
   }
 
   .prev-post:hover,
