@@ -5,4 +5,7 @@ export default defineConfig({
   experimental: {
     contentLayer: true,
   },
+  devToolbar: {
+    enabled: false,
+  },
 })
