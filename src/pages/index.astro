@@ -31,6 +31,12 @@ const intro =
 
       <article class="intro-article">
         <p class="text-block">{intro}</p>
+        <p class="text-block">
+          Caso tenha interesse, este é o meu <a
+            href="https://rdias66.codes"
+            target="_blank">portfolio ↗</a
+          >
+        </p>
       </article>
     </div>
     <Separator thin={true} />
@@ -106,6 +112,17 @@ const intro =
     .post-list {
       margin-top: 1rem;
     }
+
+    a {
+      color: var(--primary-color);
+      text-decoration: underline;
+      transition: color 0.3s ease;
+    }
+
+    a:hover {
+      color: var(--secondary-color);
+    }
+
     @media (min-width: 768px) {
       .intro-container {
         justify-items: baseline;
