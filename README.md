@@ -1,54 +1,65 @@
-# Astro Starter Kit: Basics
+# Blog de Tutoriais e Guias para Devs 🚀
 
-```sh
-npm create astro@latest -- --template basics
-```
+Bem-vindo ao repositório do [blog.rdias66.codes](https://blog.rdias66.codes)! Este projeto é um blog dedicado a tutoriais e guias para desenvolvedores interessados em DevOps e desenvolvimento Full Stack, com o objetivo de compartilhar conhecimento e auxiliar desenvolvedores na construção de suas habilidades.
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+Desenvolvido com [Astro](https://astro.build/), o blog entrega uma experiência de navegação rápida e uma estrutura otimizada para conteúdo técnico.
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+## 🔧 Tecnologias e Ferramentas
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
+- **Framework**: [Astro](https://astro.build/) - para renderização rápida e otimizada de conteúdo
+- **Markdown**: Formato principal para criação de postagens e guias, facilitando a edição e manutenção
+- **Estilização**: CSS puro em tags locais/globais
 
-## 🚀 Project Structure
+## 🌟 Funcionalidades
 
-Inside of your Astro project, you'll see the following folders and files:
+- **Conteúdo Técnico**: Foco em DevOps e desenvolvimento Full Stack com tutoriais, dicas e boas práticas
+- **Organização de Conteúdo**: Estrutura amigável e bem organizada, ideal para desenvolvedores que buscam aprendizado contínuo
+- **SEO Otimizado**: Otimização para search engines baseada no tema Astro-Paper
 
-```text
-/
-├── public/
-│   └── favicon.svg
+## 📂 Estrutura do Projeto
+
+```plaintext
+.
+├── public/              # Arquivos estáticos (imagens, ícones, etc.), além do javascript client-side que o projeto utiliza para algumas funções.
 ├── src/
-│   ├── components/
-│   │   └── Card.astro
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+│   ├── components/      # Componentes reutilizáveis do Astro
+│   ├── content/         # Diretório com postagens em Markdown
+│   ├── layouts/         # Layouts para páginas e postagens
+│   ├── pages/
+│   │   ├── index.astro  # Página inicial
+│   │   └── posts/       # Página com todos os posts e a página individual renderizada a partir do 'slug' de cada post
+│   │   └── tags/        # Página com todas as tags dos posts e a página individual renderizada a partir de cada tag
+│   └── styles/          # Estilos globais
+│   └── utils/           # Página com utilitários referentes à funções de interação com a api astro:content(arquivos da "content/")
+└── astro.config.mjs     # Configurações do Astro
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## 🚀 Executando o Projeto Localmente
 
-Any static assets, like images, can be placed in the `public/` directory.
+Para rodar o projeto localmente, siga estas etapas:
 
-## 🧞 Commands
+1. Clone o repositório:
+    ```bash
+    git clone https://github.com/rdias66/astro-blog.git
+    ```
+2. Navegue até o diretório do projeto:
+    ```bash
+    cd astro-blog
+    ```
+3. Instale as dependências:
+    ```bash
+    npm install
+    ```
+4. Inicie o servidor de desenvolvimento:
+    ```bash
+    npm run dev
+    ```
 
-All commands are run from the root of the project, from a terminal:
+Acesse [http://localhost:4322](http://localhost:4322) no navegador para visualizar o blog localmente.
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
 
-## 👀 Want to learn more?
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+📝 Contribuições
+Contribuições são bem-vindas! Se você deseja melhorar o blog, fique à vontade para abrir uma issue ou um pull request. Seu feedback é muito importante para mim.
+
+Caso queira copiar o blog e publica-lo com seu conteudo sinta-se livre para isso, siga o meu tutorial de publicação de aplicativos na AWS neste mesmo blog ;)
