@@ -1,6 +1,6 @@
 # Blog de Tutoriais e Guias para Devs 🚀
 
-Bem-vindo ao repositório do [blog.rdias66.codes](https://blog.rdias66.codes)! Este projeto é um blog dedicado a tutoriais e guias para desenvolvedores interessados em DevOps e desenvolvimento Full Stack, com o objetivo de compartilhar conhecimento e auxiliar desenvolvedores na construção de suas habilidades.
+Bem-vindo ao repositório do [blog.rdias66.codes](https://blog.rdias66.codes)! Este projeto é um blog dedicado a tutoriais e guias para desenvolvedores interessados em DevOps e desenvolvimento Full Stack, com o objetivo de compartilhar conhecimento e auxiliar desenvolvedores na construção e execução de fluxos mais complexos.
 
 Desenvolvido com [Astro](https://astro.build/), o blog entrega uma experiência de navegação rápida e uma estrutura otimizada para conteúdo técnico.
 
@@ -32,7 +32,7 @@ Desenvolvido com [Astro](https://astro.build/), o blog entrega uma experiência 
 │   └── styles/          # Estilos globais
 │   └── utils/           # Página com utilitários referentes à funções de interação com a api astro:content(arquivos da "content/")
 └── astro.config.mjs     # Configurações do Astro
-
+```
 
 ## 🚀 Executando o Projeto Localmente
 
