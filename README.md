@@ -58,8 +58,6 @@ Para rodar o projeto localmente, siga estas etapas:
 Acesse [http://localhost:4322](http://localhost:4322) no navegador para visualizar o blog localmente.
 
 
-
-📝 Contribuições
 Contribuições são bem-vindas! Se você deseja melhorar o blog, fique à vontade para abrir uma issue ou um pull request. Seu feedback é muito importante para mim.
 
 Caso queira copiar o blog e publica-lo com seu conteudo sinta-se livre para isso, siga o meu tutorial de publicação de aplicativos na AWS neste mesmo blog ;)
