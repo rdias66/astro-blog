@@ -14,7 +14,7 @@ description: Uma introdução ao planejamento requerido para um deploy completo 
 
 # Planejamento DevOps para Deploy na AWS
 
-Este post é o início de uma série de conteúdos que visa mapear e guiar o fluxo de um deploy completo na AWS. Utilizaremos como base o repositório [deploy-assist-infra](https://github.com/rdias66/aws-deploy-assist-infra) ou *dai-repo*, onde centralizaremos a infraestrutura, scripts de setup e configurações essenciais para nossos serviços.
+Este post é o início de uma série de conteúdos que visa mapear e guiar o fluxo de um deploy completo na AWS. Utilizaremos como base o repositório [aws-dai-repo](https://github.com/rdias66/aws-dai-repo) , onde centralizaremos a infraestrutura, scripts de setup e configurações essenciais para nossos serviços.
 
 Vamos cobrir desde a configuração inicial até a manutenção da infraestrutura em produção. Partimos da premissa de que já temos um aplicativo pronto, com backend e frontend em repositórios separados.
 
@@ -55,7 +55,7 @@ O foco principal deste fluxo é garantir a escalabilidade e modularização dos 
    - **Buckets S3** para armazenar dados do deploy e arquivos de mídia.
 
 4. **Planejamento e aplicação da IaC**  
-   atravéz do repositorio auxiliar de deploy [dai-repo](https://github.com/rdias66/aws-deploy-assist-infra), exploraremos as possibilidades e configuraremos atravéz de variaveis de ambiente toda a infraestrutura que será criada na AWS.
+   atravéz do repositorio auxiliar de deploy [aws-dai-repo](https://github.com/rdias66/aws-dai-repo), exploraremos as possibilidades e configuraremos atravéz de variaveis de ambiente toda a infraestrutura que será criada na AWS.
 
 5. **Configuração de domínio e certificados**  
    caso você tenha ou queira configurar um domínio próprio para o app, configuraremos ele atravéz da Cloudflare(ou Lets Encrypt), para a geração dos certificados de rede, e redirecionamento do domínio para o ip publico da instância EC2 gerada no passo anterior(os requests serão recebidos e servidos via nosso reverse proxy, no caso, escolhi o Nginx).
