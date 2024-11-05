@@ -21,7 +21,7 @@ Este diretório centraliza a configuração do reverse-proxy e dos certificados 
 
 #### 2. `scripts/`
 
-O diretório `scripts/` armazena e organiza os scripts de preparação do ambiente de deploy. Ele cobre a instalação e configuração de ferramentas essenciais na VM ou instância EC2, incluindo pacotes, Docker, Docker Compose, redes, e criação de usuários no sistema operacional para conexões SSH. Aqui também são configuradas as chaves públicas que serão utilizadas posteriormente no CI/CD.
+O diretório `scripts/` armazena e organiza os scripts de preparação do ambiente de deploy. Ele cobre a instalação e configuração de ferramentas essenciais na VM ou instância EC2, incluindo pacotes, Docker, Docker Compose, redes, e criação de usuários no sistema operacional para conexões SSH. Aqui também são configuradas as chaves públicas que serão utilizadas posteriormente no CI/CD, assim como scripts que serão configurados como rotinas para a limpeza dos containeres e imagens, e continuo controle das imagens tageadas no ECR(evitar ao máximo custos adcionais).
 
 #### 3. `tofu/`
 
@@ -39,7 +39,10 @@ Abaixo, está a estrutura básica de diretórios e arquivos do DAI-repo:
        └── conf.d/
            └── nginx.conf        
 
-├── scripts/      
+├── scripts/
+    ├── setup.sh
+    ├── clean-docker.sh
+    └── clean-ecr.sh
 
 └── tofu/                 
     ├── modules/           
