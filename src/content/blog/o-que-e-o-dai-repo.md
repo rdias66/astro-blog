@@ -29,7 +29,7 @@ Este é o diretório onde a IaC (Infraestrutura como Código) é modularizada e 
 
 ### Estrutura de Diretórios e arquivos
 
-Abaixo, está a estrutura básica de diretórios e arquivos do DAI-repo:
+Abaixo, está a estrutura básica de diretórios e arquivos do DAI-repo(mais detalhes da seção tofu no post [Infraestrutura AWS com OpenTofu](https://blog.rdias66.codes/posts/infra-aws-com-open-tofu)):
 
 ```bash
 └── reverse-proxy/ 
@@ -47,32 +47,12 @@ Abaixo, está a estrutura básica de diretórios e arquivos do DAI-repo:
 └── tofu/                 
     ├── modules/           
         ├── ec2/           
-            ├── main.tf
-            ├── variables.tf
-            └── outputs.tf
-        ├── ecr/
-            ├── main.tf
-            └── variables.tf       
+        ├── ecr/    
         ├── rds/            
-            ├── main.tf
-            ├── variables.tf
-            └── outputs.tf
-        ├── s3/            
-            ├── main.tf
-            ├── variables.tf
-            └── outputs.tf    
+        ├── s3/             
         └── vpc/            
-            ├── main.tf
-            ├── variables.tf
-            └── outputs.tf
     └── production/
         ├── security-groups/
-            ├── main.tf
-            ├── variables.tf
-            └── outputs.tf
-        ├── main.tf
-        ├── variables.tf
-        └── terraform.tfvars.example
 ```
 
 Em geral esse repositório serve como um ponto único de gestão para todas as etapas de configuração buscando tornar  o processo de deploy mais organizado e eficiente.
