@@ -41,13 +41,12 @@ Nesta etapa, vamos criar um usuário ou uma função no IAM com as permissões n
 | AmazonEC2FullAccess           | Acesso total ao EC2 para criação de instâncias.                       | Sim             | N/A                      |
 | AmazonRDSFullAccess           | Gerenciamento total do RDS.                                           | Não             | Container local          |
 | AmazonVPCFullAccess           | Criação e gerenciamento de VPCs.                                      | Sim             | N/A                      |
-| AmazonECRFullAccess           | Acesso total ao ECR para repositório de imagens Docker.               | Não             | Docker Hub               |
 | AmazonEC2ContainerRegistryFullAccess | Gerenciamento completo do Amazon ECR para uso de contêineres Docker. | Não        | Docker Hub          |
 | IAMFullAccess                 | Gerenciamento completo de usuários e permissões no IAM.(voltado para equipes)            | Sim             | N/A |
 
 > **Dica**: Algumas permissões são marcadas como "Não" para minimizar custos. O uso intensivo do ECR, por exemplo, pode gerar cobranças adicionais para armazenamento de novas tags de imagens. A ideia é maximizar o uso do *free tier* da AWS durante o desenvolvimento.
 
-- Com a finalização da criação do usuário, clique nele na tabela de usuários, e nas identifique em suas informações a opção 'Criar chave de acesso'.
+- Com a finalização da criação do usuário, clique nele na tabela de usuários, e na seção de resumo, identifique o botão 'Criar chave de acesso'.
 - Selecione a opção 'Command Line Interface (CLI)', marque o checkbox de Confirmação no fim da seção e prossiga.
 - Crie uma tag para identificar esta chave de acesso, algo como `iac-ak`.
 - Finalizando, **guarde em lugares seguros e com backups os valores da AK(Access Key) e o Secret, esses valores serao usados em multiplas fases de nosso fluxo**
