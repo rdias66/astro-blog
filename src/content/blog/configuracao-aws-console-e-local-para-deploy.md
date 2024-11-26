@@ -63,6 +63,17 @@ Para o OpenTofu ser aplicado precisaremos de uma forma de armazenar um arquivo d
 
 > **Terraform?**  Não estavamos usando o OpenTofu? Sim, porém o OpenTofu é um fork *open source* do terraform, entao veremos muito esse nome em nossa IaC. Em breve trarei um post sobre este assunto.
 
+
+### 4. Criação da VPC para as ferramentas do estrutura
+Para as ferramentas que instanciaremos via o OpenTofu uma VPC(Virtual private network) deve ser inclusa para as instancias se conectarem. Poderiamos fazer isso dinamicamente na IaC, porem sua complexidade acaba deixando mais facil a criação previa diretamente no console.
+
+- No console da AWS, clique na barra de pesquisa e procure por VPC.
+- Clique em Criar VPC (canto superior esquerdo)
+- Marque somente VPC, nomeie da forma que preferir, defina o CIDR IPv4 no range que preferir (16 a 28) e clique em criar(deixaremos tudo com os valores default).
+- Isso gerará a VPC, e agora copiaremos o ID da VPC na tela de detalhes, normalmente é o primeiro item mostrado.
+- Este valor sera usado nas variaveis do projeto da infra(terraform.tfvasrs > vpc_id="aqui")
+
+
 ## Instalações e configurações locais
 
 ### 1. Instalação do AWS CLI
