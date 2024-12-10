@@ -64,18 +64,39 @@ Para o OpenTofu ser aplicado precisaremos de uma forma de armazenar um arquivo d
 > **Terraform?**  Não estavamos usando o OpenTofu? Sim, porém o OpenTofu é um fork *open source* do terraform, entao veremos muito esse nome em nossa IaC. Em breve trarei um post sobre este assunto.
 
 
-### 4. Coletar o ID da VPC ou executar a criação da VPC para as ferramentas do estrutura
+### 4. Coletar o ID da VPC ou Executar a Criação da VPC para as Ferramentas da Estrutura
 
-Para as ferramentas que instanciaremos via o OpenTofu uma VPC(Virtual private network) deve ser inclusa para as instancias se conectarem. Poderiamos fazer isso dinamicamente na IaC, porem sua complexidade acaba deixando mais facil a criação previa diretamente no console.
+Para as ferramentas que iremos instanciar via OpenTofu, uma VPC (Virtual Private Cloud) deve ser incluída para que as instâncias possam se conectar. Poderíamos realizar isso dinamicamente na IaC, porém sua complexidade acaba tornando mais fácil a criação prévia diretamente no console.
 
-Normalmente na criação da conta a AWS gera uma vpc padrão para o usuário. Logo, apenas precisamos pegar o id dessa vpc. Vamos nos dirigir ate barra de pesquisa e procurar por VPC, depois clicaremos em 'Suas VPCs' na dashboard direita e verificar se alguma esta listada(normalmente sem nome), caso esteja, clique nela e copie o ID(algo parecido com vpc-123456789). Este valor sera usado nas variaveis do projeto da infra(terraform.tfvasrs > vpc_id="aqui"). 
+Normalmente, ao criar uma conta na AWS, uma VPC padrão é gerada para o usuário. Portanto, apenas precisamos obter o ID dessa VPC. Siga os passos abaixo:
 
 Caso nao haja nada criado, execute os seguintes passos:
 
-- Clique em Criar VPC (canto superior esquerdo)
-- Marque somente VPC, nomeie da forma que preferir, defina o CIDR IPv4 no range que preferir (16 a 28) e clique em criar(deixaremos tudo com os valores default).
-- Isso gerará a VPC, e agora copiaremos o ID da VPC na tela de detalhes, normalmente é o primeiro item mostrado.
-- Este valor sera usado nas variaveis do projeto da infra(terraform.tfvasrs > vpc_id="aqui")
+- Acesse a Barra de Pesquisa: No console da AWS, dirija-se à barra de pesquisa e procure por "VPC".
+- Navegue para 'Suas VPCs': Clique em 'Suas VPCs' na dashboard à direita.
+- Verifique a Lista de VPCs: Verifique se há alguma VPC listada (geralmente sem nome). Se existir, clique nela e copie o ID (algo parecido com vpc-123456789).
+-Atualize as Variáveis do Projeto: Este valor será utilizado nas variáveis do projeto de infraestrutura (terraform.tfvars):]
+
+``` bash
+  vpc_id = "vpc-123456789"
+ ```
+
+ #### Caso não haja nenhuma VPC criada, execute os seguintes passos:
+
+- Clique em "Criar VPC": No canto superior esquerdo do console da AWS, clique em "Criar VPC".
+- Configure a VPC:
+    Tipo de Recurso: Marque somente VPC.
+    Nome: Nomeie a VPC da forma que preferir.
+    CIDR IPv4: Defina o intervalo de CIDR IPv4 conforme sua preferência (entre /16 e /28).
+    Opções Avançadas: Deixe todas as outras opções com os valores padrão.
+- Crie a VPC: Clique em "Criar".
+- Copie o ID da VPC: Após a criação, a VPC será gerada. Copie o ID da VPC na tela de detalhes, normalmente o primeiro item exibido.
+
+-Atualize as Variáveis do Projeto: Este valor será utilizado nas variáveis do projeto de infraestrutura (terraform.tfvars):]
+
+``` bash
+  vpc_id = "vpc-123456789"
+ ```
 
 
 ## Instalações e configurações locais
@@ -83,13 +104,18 @@ Caso nao haja nada criado, execute os seguintes passos:
 ### 1. Instalação do AWS CLI
 - Certifique-se de que o AWS CLI está instalado em sua máquina local. Caso não tenha, você pode seguir as instruções [aqui](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) para a instalação.
 - Após a instalação, execute o comando `aws configure` no terminal e forneça os seguintes dados:
+``` bash
+  aws configure
+ ```
   - Chave de acesso (Access Key) e chave secreta (Secret Access Key) do usuário criado no IAM, citados previamente.
   - Região padrão: defina como `sa-east-1` ou a região onde seus recursos serão implantados.
   - Formato de saída padrão: você pode deixar como `json` ou escolher outro de sua preferência.
 
 ### 2. Testar configuração do AWS CLI
 - Para testar se o AWS CLI está configurado corretamente, execute um comando simples, como:
-  ```bash
+
+``` bash
   aws s3 ls
+ ```
 
 Com tudo isso pronto podemos começar nossa seção da Infraestrutura como código efetivamente!
