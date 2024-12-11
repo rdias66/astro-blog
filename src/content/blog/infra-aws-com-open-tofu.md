@@ -12,7 +12,7 @@ tags:
 description: Configuração da seção do OpenTofu no repositório auxiliar de deploy para AWS(dai-repo) 
 ---
 
-Neste post, vamos explorar em detalhes a configuração necessária para criar uma infraestrutura na AWS utilizando IaC com o OpenTofu. Ao final, teremos a estrutura para o deploy na AWS criada, com uma instância EC2 com acesso SSH configurado, uma instância RDS, repositórios de contêineres para a aplicação e um bucket de mídia, caso a aplicação precise. 
+Neste post, vamos explorar em detalhes a configuração necessária para criar uma infraestrutura na AWS utilizando IaC com o OpenTofu([Por que usar o OpenTofu?](https://blog.rdias66.codes/posts/iac-opentofu-e-terraform)). Ao final, teremos a estrutura para o deploy na AWS criada, com uma instância EC2 com acesso SSH configurado, uma instância RDS, repositórios de contêineres para a aplicação e um bucket de mídia, caso a aplicação precise. 
 
  Esse tutorial usa como referência o repositório auxiliar de deploy para AWS, o `aws-dai-repo`, que foi a ferramenta que desenvolvi para organizar e estabelecer todas as partes do deploy de uma aplicação. 
 
@@ -87,6 +87,9 @@ tofu init
 ```
 Esse comando inicializa o diretório de trabalho para OpenTofu, baixando os plugins e módulos necessários para o provedor AWS.
 
+O resultado do init deve ser este:
+![Sucesso no tofu init](https://github.com/rdias66/astro-blogfolio-assets/blob/main/tofu%20prints/tofu%20init%20success.png?raw=true)
+
 3 - Planejar a Execução:
 
 Para revisar as mudanças que o OpenTofu aplicará, execute:
@@ -95,6 +98,11 @@ Para revisar as mudanças que o OpenTofu aplicará, execute:
 tofu plan
 ```
 O comando tofu plan mostra um resumo de todas as alterações que o OpenTofu fará em sua infraestrutura. Essa etapa é crucial para identificar possíveis problemas antes da aplicação das configurações. 
+
+O resultado do plan deve ser este:
+![Sucesso no tofu plan](https://github.com/rdias66/astro-blogfolio-assets/blob/main/tofu%20prints/tofu%20plan%20sucess.png?raw=true)
+
+Atente-se que no meu exemplo as mudanças foram poucas, neste caso a estrutura ja está criada e apenas fiz mudanças para exemplificação!
 
 4 - Corrigir Configurações se Necessário:
 
@@ -106,6 +114,13 @@ Após confirmar que o plano de execução está correto, aplique as configuraç�
 ```bash
 tofu apply
 ```
+
+Este comando vai lhe perguntar se as mudanças listadas deve ser aceitas:
+![Tofu apply input](https://github.com/rdias66/astro-blogfolio-assets/blob/main/tofu%20prints/tofu%20apply%20input.png?raw=true)
+
+Depois de sim, este deve ser o resultado final, atente-se que neste exemplo as mudanças e criações executadas em minha infraestrutura foram apenas 2, uma mudança e uma criaçao, na primeira vez que voce rodar isso, o output será diferente!
+
+![Tofu apply success](https://github.com/rdias66/astro-blogfolio-assets/blob/main/tofu%20prints/tofu%20apply%20success.png?raw=true)
 
 6 - Ajustes finais
 
@@ -125,34 +140,34 @@ Para configurar a conexão entre sua instância EC2 e o banco de dados RDS diret
 6.6 Confirme as configurações sugeridas (o AWS automaticamente ajustará os grupos de segurança para permitir a conexão) e clique em **Salvar**.  
 
 
-7 - Criação da Chave de Acesso SSH
+### Acesso à maquina virtual 
 
 Com a sua instância EC2 criada, é crucial garantir que você tenha acesso direto a ela, pois isso será fundamental para o futuro do nosso processo de deploy. A AWS duas principais formas de acesso a esta instância, via ssh(Você precisa ter uma ferramenta SSH instalada em seu PC para isso) ou diretamente no console. Para isso, precisamos criar uma chave de acesso SSH `.pem` **com o mesmo nome definido na variável `key-name`** no arquivo `terraform.tfvars`. Siga os passos abaixo para configurar essa chave:
 
 
 #### Acesso Diretamente pelo Console AWS  
 
-1. No painel **EC2**, localize a instância que deseja acessar na lista de instâncias.  
-2. Clique no botão **"Conectar"** na parte superior da página.  
-3. A AWS apresentará as opções de acesso:  
+1. No navegador, faça login na AWS Management Console. 
+2. No painel **EC2**(barra de pesquisa > EC2), localize a instância que deseja acessar na lista de instâncias.  
+3. Com a seção de detalhes da instancia selecionada aberta, identifique e clique no botão **"Conectar"** na parte superior da página.  
+4. A AWS apresentará as opções de acesso:  
    - **Sessão EC2 no Console:** Esta é a primeira opção carregada e permite que você acesse diretamente pelo próprio console da AWS, sem a necessidade de ferramentas externas.  
-   - **Cliente SSH:** Uma forma auxiliar, que normalmente é a mais prática para conexões remotas seguras via terminal.  
 
 
-## Passos para Criar e Configurar a Chave .pem para o acesso SSH
+#### Acesso SSH (túnel de sua maquina local > EC2)
 
-### 1. Identifique o Nome da Chave SSH  
+1. Identifique o Nome da Chave SSH  
 
 Abra o arquivo `terraform.tfvars` e localize a variável `key-name`. Por exemplo:  
 ```hcl
 key-name = "my-ec2-key"
 ```
 
-### 2. Acesse o Console da AWS
+2. Acesse o Console da AWS
 
 No navegador, faça login na AWS Management Console e procure pelo serviço EC2.
 
-### 3. Crie o Par de Chaves SSH  
+3. Crie o Par de Chaves SSH  
 
 3.1 No painel **EC2**, clique na opção **"Pares de chaves"** (Key Pairs) no menu lateral.  
 3.2 Clique no botão **"Criar par de chaves"**.  
@@ -161,13 +176,14 @@ No navegador, faça login na AWS Management Console e procure pelo serviço EC2.
    - **Formato:** Escolha o formato **PEM** (necessário para conexão via SSH).  
 3.4 Clique em **"Criar par de chaves"**.  
 
-### 4. Baixe e Salve o Arquivo .pem
+4. Baixe e Salve o Arquivo .pem
 
 O arquivo .pem será automaticamente baixado para o seu computador.
 Mova o arquivo para o mesmo diretório onde está o arquivo terraform.tfvars, ou para um local seguro de sua escolha. Este arquivo será necessário para acessar sua instância EC2 no futuro.
+> Crie backups e guarde-os em locais separados, este arquivo é importante, e não pode ser baixado novamente! 
 
 
-### 5. Acesso SSH
+5. Acesso SSH
 
 Com tudo pronto podemos nos conectar a instancia com o seguinte comando, no mesmo nivel onde a chave .pem baixada previamente está. 
 

@@ -9,7 +9,7 @@ export interface Props {
   posts: CollectionEntry<'blog'>[]
 }
 const { post, posts } = Astro.props
-const { title, pubDatetime, modDatetime, tags } = post.data
+const { title, pubDatetime, modDatetime, tags, author } = post.data
 
 const { Content } = await post.render()
 export async function getStaticPaths() {
@@ -50,6 +50,7 @@ const nextPost =
 
 <main>
   <h1 class="post-title">{title}</h1>
+  <span class="author-text">Autor: {author}</span>
   <DateCard pubDatetime={pubDatetime} modDatetime={modDatetime} />
 
   <article id="article" class="prose article-content">
@@ -120,6 +121,12 @@ const nextPost =
     font-weight: bold;
     color: var(--text-primary);
     margin-bottom: 1rem;
+  }
+
+  .author-text {
+    font-size:;
+    font-style: italic;
+    padding-left: 0.5rem;
   }
 
   .article-content {

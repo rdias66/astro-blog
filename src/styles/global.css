@@ -144,21 +144,22 @@ html, body {
 }
 
 .prose pre {
-  background-color: #2d2d2d; /* A darker tone for better contrast */
-  color: #f8f8f2;
-  padding: 1.5rem;
-  border-radius: 6px;
-  overflow-x: auto;
-  margin: 1.5rem 0;
-  font-size: 0.875rem;
-  font-family: "Fira Code", monospace;
+  background-color: #1e1e1e; /* Fundo escuro para contraste */
+  color: #dcdcdc; /* Texto cinza claro */
+  padding: 1rem; /* Espaço interno */
+  border-radius: 6px; /* Bordas arredondadas */
+  border: 1px solid #333; /* Borda sutil */
+  overflow-x: auto; /* Rolagem horizontal para linhas longas */
+  margin: 1.5rem 0; /* Espaçamento acima e abaixo */
+  font-size: 0.875rem; /* Tamanho levemente reduzido */
+  font-family: monospace; /* Fonte padrão monoespaçada */
 }
 
 .prose code {
-  background-color: rgba(255, 229, 100, 0.2); /* Subtle highlight */
-  color: #e2b93d;
-  padding: 0.2rem 0.4rem;
-  border-radius: 4px;
+  background-color: #2a2a2a; /* Fundo levemente destacado */
+  color: #e5c07b; /* Cor dourada para o texto */
+  padding: 0.2rem 0.4rem; /* Espaço interno */
+  border-radius: 4px; /* Bordas arredondadas */
 }
 
 .prose table {
@@ -182,6 +183,16 @@ html, body {
 
 .prose tr:nth-child(even) {
   background-color: rgba(255, 255, 255, 0.05);
+}
+
+.prose img {
+  max-width: 100%; /* Para garantir que a imagem não ultrapasse o container */
+  margin: 1.5rem 0; /* Espaçamento acima e abaixo */
+  border-radius: 8px; /* Bordas arredondadas para um visual mais elegante */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+  display: block; /* Garante alinhamento */
+  margin-left: auto; /* Centraliza horizontalmente */
+  margin-right: auto; /* Centraliza horizontalmente */
 }
 
 /* Alert Styles */
