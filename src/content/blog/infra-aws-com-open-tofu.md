@@ -20,13 +20,14 @@ Para entender melhor o uso de módulos no OpenTofu, focaremos na pasta `tofu/`, 
 
 > Antes de avançarmos, é importante ter toda a configuração inicial pronta no console da AWS e no ambiente local (como AWS CLI, Git etc.). Caso precise de ajuda com essa etapa, você pode seguir este guia: [Configuração necessária no console AWS e setup local para deploy](https://blog.rdias66.codes/posts/configuracao-aws-console-e-local-para-deploy) 
 
-
 Esses primeiros passos girarão em torno do repositório auxiliar, entao vamos começar clonando o repositório aws-dai-repo em sua máquina. No diretório de sua preferência, execute:
 
 `git clone https://github.com/rdias66/aws-dai-repo.git`
 
 
-Para entender mais sobre a estrutura do dai-repo, recomendo também o post: [O que é o dai-repo?](https://blog.rdias66.codes/posts/o-que-e-o-dai-repo)
+> Para entender mais sobre a estrutura do dai-repo em completo, recomendo também o post: [O que é o dai-repo?](https://blog.rdias66.codes/posts/o-que-e-o-dai-repo)
+
+Com o repositório em seu ambiente, vamos focar no diretório referente ao OpenTofu:
 
 ## Estrutura do diretório `tofu/`
 
@@ -65,10 +66,24 @@ A seguir a estrutura detalhada do diretório com uma breve descrição, os arqui
         └── terraform.tfvars.example # exemplo de arquivo de variaveis de ambiente, funcionamento similar às .envs 
 ```
 
-## Execução da IaC:
+Nossas configurações residirão nos arquivos do diretório 'production', aqui você irá adaptar as instancias a serem geradas no arquivo 'main.tf', posteriormente ajustar as variaveis utilizadas por eles no arquivo 'variables.tf' caso necessário e criar o arquivo terraform.tfvars (espécie de .env para nossa IaC).
 
-1 - Criar e popular o arquivo `terraform.tfvars`:
-  Este arquivo deve ser criado no mesmo nivel que o seu exemplo `tofu/production/terraform.tfvars.example`. Esse exemplo ja tem configurado em si todos os valores necessários para a estrutura de nosso planejamento, mas caso tenha curiosidade ou queira ter certeza que tudo isso esteja de acordo com suas necessidades, de uma olhada na documentação da AWS para estes serviços.
+
+
+### 1 - Ajustes em `production/main.tf`
+
+Este arquivo é o ponto inicial de onde a IaC será gerada (uma espécie de `main.go`, `main.ts`, `index.js`, etc.). Aqui estão as instâncias dos módulos da AWS a serem gerados. Na configuração padrão do repositório, ele já gera uma estrutura base. No entanto, o seu caso pode precisar de mais ou menos ferramentas, então adapte conforme necessário. 
+
+>Para mais informações sobre a sintaxe e como instanciar novos módulos, consulte este artigo:  
+[IaC OpenTofu e Terraform](https://blog.rdias66.codes/posts/iac-open-tofu-e-terraform)
+
+### 2 - Ajustes em `production/variables.tf`
+Caso haja alterações nos módulos, as variáveis correspondentes devem ser listadas neste arquivo. Para isso, siga o formato já aplicado nos blocos referentes aos módulos presentes no estado inicial do repositório.
+
+### 3 - Criar e popular o arquivo `terraform.tfvars`
+Este arquivo deve ser criado no mesmo nível que o exemplo `tofu/production/terraform.tfvars.example`. O exemplo já contém todos os valores necessários para a estrutura do planejamento. 
+
+Se quiser revisar ou garantir que tudo esteja de acordo com suas necessidades, consulte a documentação da AWS para os serviços utilizados:
 
 - [AWS Regions and Availability Zones](https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Concepts.RegionsAndAvailabilityZones.html)
 - [Amazon VPC](https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html)
@@ -78,8 +93,7 @@ A seguir a estrutura detalhada do diretório com uma breve descrição, os arqui
 - [Amazon ECR](https://docs.aws.amazon.com/AmazonECR/latest/userguide/what-is-ecr.html)
 - [Using Bucket Policies in Amazon S3](https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-bucket-policies.html)
 
-2 - Inicializar o OpenTofu:
-
+### 4 - Inicializar o OpenTofu:
 Com tudo configurado, inicie o OpenTofu executando o seguinte comando no nível de diretório `tofu/production/`:
 
 ```bash
@@ -90,9 +104,9 @@ Esse comando inicializa o diretório de trabalho para OpenTofu, baixando os plug
 O resultado do init deve ser este:
 ![Sucesso no tofu init](https://github.com/rdias66/astro-blogfolio-assets/blob/main/tofu%20prints/tofu%20init%20success.png?raw=true)
 
-3 - Planejar a Execução:
+### 5 - Planejar a Execução:
 
-Para revisar as mudanças que o OpenTofu aplicará, execute:
+Para mapear as mudanças que o OpenTofu aplicará, execute:
 
 ```bash
 tofu plan
@@ -104,11 +118,11 @@ O resultado do plan deve ser este:
 
 Atente-se que no meu exemplo as mudanças foram poucas, neste caso a estrutura ja está criada e apenas fiz mudanças para exemplificação!
 
-4 - Corrigir Configurações se Necessário:
+### 6 - Corrigir Configurações se Necessário:
 
 Se o OpenTofu mostrar mensagens de erro ou inconsistências durante o planejamento, ajuste os valores conforme recomendado. A CLI do OpenTofu fornece detalhes sobre o que precisa ser corrigido.
 
-5 - Aplicar as Configurações:
+### 7 - Aplicar as Configurações:
 
 Após confirmar que o plano de execução está correto, aplique as configurações com
 ```bash
@@ -122,22 +136,30 @@ Depois de sim, este deve ser o resultado final, atente-se que neste exemplo as m
 
 ![Tofu apply success](https://github.com/rdias66/astro-blogfolio-assets/blob/main/tofu%20prints/tofu%20apply%20success.png?raw=true)
 
-6 - Ajustes finais
+### 8. Ajustes Finais
 
-Caso ocorram erros durante a aplicação, o OpenTofu mostrará instruções para correção. Revise as configurações e execute novamente tofu apply até que a infraestrutura seja criada com sucesso.
+Caso ocorram erros durante a aplicação, o OpenTofu mostrará instruções para correção. Revise as configurações e execute novamente `tofu apply` até que a infraestrutura seja criada com sucesso.
 
-Ao final, você terá uma infraestrutura básica na AWS, configurada e pronta para o deploy do seu aplicativo. Essa configuração inclui a instância EC2, um banco de dados RDS, repositórios ECR para imagens Docker, e um bucket S3 para armazenamento de mídia do projeto. Porém isto pode variará de acordo com os modulos que voce utilizou em sua IaC.
+Ao final, você terá uma infraestrutura básica na AWS, configurada e pronta para o deploy do seu aplicativo. Essa configuração inclui:
 
-Um ponto importante é realizar a configuração da Conexão EC2-RDS no Console AWS  
+- Instância EC2
+- Banco de dados RDS
+- Repositórios ECR para imagens Docker
+- Bucket S3 para armazenamento de mídia do projeto
 
-Para configurar a conexão entre sua instância EC2 e o banco de dados RDS diretamente pelo Console AWS, siga os passos abaixo:  
+**Nota:** A infraestrutura final pode variar dependendo dos módulos utilizados em sua IaC.
 
-6.1 Acesse o serviço **RDS** no Console AWS.  
-6.2 Localize e clique na instância RDS que deseja configurar.  
-6.3 Na página de detalhes da instância, clique no botão **Ações** no canto superior esquerdo.  
-6.4 Selecione a opção **Configurar conexão EC2**.  
-6.5 Escolha a instância EC2 que deverá acessar o banco de dados.  
-6.6 Confirme as configurações sugeridas (o AWS automaticamente ajustará os grupos de segurança para permitir a conexão) e clique em **Salvar**.  
+#### Configuração da Conexão EC2-RDS no Console AWS
+
+Para configurar a conexão entre sua instância EC2 e o banco de dados RDS diretamente pelo Console AWS, siga os passos abaixo:
+
+1. Acesse o serviço **RDS** no Console AWS.  
+2. Localize e clique na instância RDS que deseja configurar.  
+3. Na página de detalhes da instância, clique no botão **Ações** no canto superior esquerdo.  
+4. Selecione a opção **Configurar conexão EC2**.  
+5. Escolha a instância EC2 que deverá acessar o banco de dados.  
+6. Confirme as configurações sugeridas (o AWS ajustará automaticamente os grupos de segurança para permitir a conexão) e clique em **Salvar**.
+
 
 
 ### Acesso à maquina virtual 
