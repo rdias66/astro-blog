@@ -15,6 +15,11 @@ Antes de colocarmos a mão na massa, é importante trazer uma visão geral da es
 
 O DAI-repo (Deploy Assistance Infrastructure Repository) é um repositório projetado para organizar e automatizar tarefas de deploy de forma eficiente. Ele agrupa configurações, scripts e infraestrutura como código (IaC), permitindo que o processo seja replicável e escalável. A ideia é simplificar o gerenciamento de ambientes de deploy, independentemente de sua complexidade.
 
+[Repositório aws-dai-repo](https://github.com/rdias66/aws-dai-repo) 
+
+[Repositório azure-dai-repo](https://github.com/rdias66/azure-dai-repo) 
+
+
 ### Estrutura do Repositório
 
 O repositório é organizado em três diretórios principais, cada um com um papel específico no processo de deploy:
