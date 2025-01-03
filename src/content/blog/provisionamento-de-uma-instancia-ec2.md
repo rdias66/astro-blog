@@ -16,7 +16,7 @@ uma máquina virtual que deseja provisionar e configurar para otimizar e organiz
 processo com os seguintes passos: 
 
 - Estruturização de diretórios
-- Execução dO script de provisionamento
+- Execução do script de provisionamento
 - Configuração de rotinas
 
  Faremos isso com a base do repositório auxiliar : [Repositório aws-dai-repo](https://github.com/rdias66/aws-dai-repo) 
@@ -84,7 +84,7 @@ Para ver e analisar o script em sua intergridade : [setup.sh](https://github.com
 No final do script, você será solicitado a fornecer suas credenciais AWS para configurar o AWS CLI, aqui você precisara dos dados de ak e secret do seu usuario IAM criado previamente( para mais sobre: [Configuração necessária no console AWS e setup local para deploy](https://blog.rdias66.codes/posts/configuracao-aws-console-e-local-para-deploy))
 
 Preencha:
-- AK (access key) e secret com os valores do IAM user.
+- AK (access key) e secret com os valores do IAM user (ele deve ter permissões de uso do ECR, por exemplo AmazonAdministratorFullAccess ou AmazonEC2ContainerRegistryFullAccess).
 - A região padrão(default region name) de uso da infraestrutura ("sa-east-1" de acordo com nosso padrão)
 - Formato padrão de output (JSON) 
 
