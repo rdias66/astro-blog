@@ -25,24 +25,25 @@ Antes de qualquer coisa, é necessário criar uma conta na AWS caso ainda não t
 Nesta etapa, vamos criar um usuário ou uma função no IAM com as permissões necessárias para que o OpenTofu (Terraform) possa gerenciar a infraestrutura de forma segura e eficaz.
 
 1. **Acesse o IAM**: No painel da AWS, use a barra de pesquisa no canto superior esquerdo, digite "IAM" e selecione a primeira opção que aparecer, sob *Serviços*.
-2. **Crie um Usuário ou Role**:
+2. **Crie um Usuário**:
    - No menu à esquerda, na seção de gerenciamento de acesso, clique em "Usuários".
    - Na página de Usuários, clique em Criar "Usuario".
    - Seguiremos o processo de criação com as instruções da AWS até chegar à tela de Definir permissões.
    - Clique em "Anexar políticas diretamente", desta forma teremos mais controle dos acessos que nosso usuário terá, neste caso criaremos um usuário mestre para o OpenTofu e nossas possíveis manipulações manuais. Se em seu cenário, caso queira delegar funçoes de manutenção em produção para outros desenvolvedores em sua equipe, os proximos usuários que você criará podem ter permissões mais apropriadas a suas funções.
    - Agora selecionaremos a extensão dos acessos que nossa IaC conseguirá ter na nossa conta.
 
-   Abaixo está uma tabela com as permissões recomendadas e alternativas para minimizar custos durante o desenvolvimento.
+   Abaixo está uma tabela com as permissões recomendadas e alternativas(ào serviço da AWS)  para minimizar custos durante o desenvolvimento caso tenha interesse em delegar múltiplos usuários  com diferentes funções e acessos em sua infraestrutura.
+   **_Para nosso caso apenas a seleção do Administrator Access é necessário, pois ele da acesso a todos os serviços da AWS_**  
 
 | **Permissão**                 | **Descrição**                                                          | **Necessário?** | **Alternativa**          |
 |-------------------------------|------------------------------------------------------------------------|-----------------|--------------------------|
 | AdministratorAccess           | Permissão administrativa completa em todos os recursos.               | Sim             | N/A                      |
-| AmazonS3FullAccess            | Acesso total ao S3 para armazenar o estado do Terraform.              | Sim             | N/A                      |
-| AmazonEC2FullAccess           | Acesso total ao EC2 para criação de instâncias.                       | Sim             | N/A                      |
+| AmazonS3FullAccess            | Acesso total ao S3 para armazenar o estado do Terraform.              | Não             | N/A                      |
+| AmazonEC2FullAccess           | Acesso total ao EC2 para criação de instâncias.                       | Não             | N/A                      |
 | AmazonRDSFullAccess           | Gerenciamento total do RDS.                                           | Não             | Container local          |
-| AmazonVPCFullAccess           | Criação e gerenciamento de VPCs.                                      | Sim             | N/A                      |
+| AmazonVPCFullAccess           | Criação e gerenciamento de VPCs.                                      | Não             | N/A                      |
 | AmazonEC2ContainerRegistryFullAccess | Gerenciamento completo do Amazon ECR para uso de contêineres Docker. | Não        | Docker Hub          |
-| IAMFullAccess                 | Gerenciamento completo de usuários e permissões no IAM.(voltado para equipes)            | Sim             | N/A |
+| IAMFullAccess                 | Gerenciamento completo de usuários e permissões no IAM.(voltado para equipes)            | Não             | N/A |
 
 > **Dica**: Algumas permissões são marcadas como "Não" para minimizar custos. O uso intensivo do ECR, por exemplo, pode gerar cobranças adicionais para armazenamento de novas tags de imagens. A ideia é maximizar o uso do *free tier* da AWS durante o desenvolvimento.
 
